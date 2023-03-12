@@ -30,6 +30,23 @@ const typeDefs = gql`
         items: [Item]
         libraries: [Library]
     }
+
+    type Auth {
+        token: ID
+        user: User
+    }
+
+    type Query {
+        userItems(username: String!): User 
+        userLibraries: User
+        library(libraryId: ID!): Library
+    }
+
+    type Mutation {
+        addUser(username: String!, email: String!, password: String!): Auth
+        login(email: String!, password: String!):Auth
+        addItem(owner: ID!, name: String!, description: String!, available: Boolean!): Item
+    }
 `;
 
 module.exports = typeDefs;

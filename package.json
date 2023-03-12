@@ -1,15 +1,13 @@
 {
-  "homepage": "https://genmla.github.io/portfolio/",
-  "name": "genmla-portfolio",
+  "name": "hoodlinked",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "concurrently": "^5.1.0"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
+    "develop": "cd server && npm run watch",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
