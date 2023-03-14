@@ -5,7 +5,7 @@ import AppNavbar from './components/Navbar';
 function App() {
   return (
     <div >
-    <AppNavbar />
+    <Navbar />
     </div>
   );
 }
