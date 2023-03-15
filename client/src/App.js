@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import {
   ApolloClient,
   InMemoryCache,
@@ -13,6 +13,8 @@ import './App.css';
 
 import Nav from './components/Nav';
 import Home from './Pages/Home'
+import Dashboard from './Pages/Dashboard'
+import Groups from './Pages/Groups'
 import LoginForm from './components/LoginForm'
 
 const httpLink = createHttpLink({
@@ -36,19 +38,16 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <ApolloProvider client={client}>
-        <Router>
-          <div >
+    <>
+    <ApolloProvider client={client}> 
             <Nav />
             <Routes>
-              <Route
-                path="/"
-                element={<Home />}
-              />
+              <Route path="/" element={<Home />}/>
+              <Route path="/dashboard" element={<Dashboard />}/>
+              <Route path="/groups" element={<Groups />}/>
             </Routes>
-          </div>
-        </Router>
     </ApolloProvider>
+    </>
 
   );
 }
