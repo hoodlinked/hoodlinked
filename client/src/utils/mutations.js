@@ -13,7 +13,7 @@ mutation AddUser($username: String!, $email: String!, $password: String!) {
   }  
 `;
 
-export const LOGIN_USER = gql `
+export const LOGIN_USER = gql`
 mutation Login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       token
@@ -26,14 +26,27 @@ mutation Login($email: String!, $password: String!) {
 `
 
 export const ADD_ITEM = gql`
-mutation AddItem($owner: ID!, $name: String!, $description: String!, $available: Boolean!) {
-    addItem(owner: $owner, name: $name, description: $description, available: $available) {
-      owner {
-        _id
-      }
+mutation AddItem($name: String!, $description: String!, $available: Boolean!) {
+  addItem(name: $name, description: $description, available: $available) {
+    name
+    description
+    available
+  }
+}
+  `
+
+export const CREATE_LIBRARY = gql`
+  mutation CreateLibrary( $name: String!) {
+    createLibrary(name: $name) {
       name
-      description
-      available
+    }
+  }  
+  `
+
+export const ADD_LIBRARY_USER = gql`
+  mutation AddLibraryUser($libraryId: ID!) {
+    addLibraryUser(libraryId: $libraryId) {
+      _id
     }
   }
-  `  
+  `

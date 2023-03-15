@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-const Category = require('./Category');
-
 const { Schema } = mongoose;
 
 const itemSchema = new Schema({
@@ -11,7 +9,8 @@ const itemSchema = new Schema({
         trim: true
     }, 
     description: {
-        type: String
+        type: String, 
+        required: true,
     },
     owner: {
         type: Schema.Types.ObjectId,
