@@ -14,6 +14,8 @@ export default function Nav() {
                     Home
                 </BreadcrumbLink>
             </BreadcrumbItem>
+
+
             <BreadcrumbItem>
                 <BreadcrumbLink as={Link} to='#'>
                     About
@@ -21,6 +23,12 @@ export default function Nav() {
             </BreadcrumbItem>
             <BreadcrumbItem isCurrentPage>
                 <BreadcrumbLink>Contact</BreadcrumbLink>
+            </BreadcrumbItem>
+            
+            <BreadcrumbItem>
+                <BreadcrumbLink as={Link} to='#'>
+                    Groups
+                </BreadcrumbLink>
             </BreadcrumbItem>
         </Breadcrumb>
     )
