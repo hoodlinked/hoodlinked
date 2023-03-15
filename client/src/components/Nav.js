@@ -3,30 +3,27 @@ import {
     BreadcrumbItem,
     BreadcrumbLink,
 } from '@chakra-ui/react'
-import { Link } from "@reach/router"
 
 export default function Nav() {
     return (
 
         <Breadcrumb>
             <BreadcrumbItem>
-                <BreadcrumbLink as={Link} to='#'>
+                <BreadcrumbLink href='/'>
                     Home
                 </BreadcrumbLink>
             </BreadcrumbItem>
 
 
             <BreadcrumbItem>
-                <BreadcrumbLink as={Link} to='#'>
-                    About
+                <BreadcrumbLink href='/dashboard'>
+                    Dashboard
                 </BreadcrumbLink>
             </BreadcrumbItem>
-            <BreadcrumbItem isCurrentPage>
-                <BreadcrumbLink>Contact</BreadcrumbLink>
-            </BreadcrumbItem>
-            
+
+
             <BreadcrumbItem>
-                <BreadcrumbLink as={Link} to='#'>
+                <BreadcrumbLink href='/groups'>
                     Groups
                 </BreadcrumbLink>
             </BreadcrumbItem>
