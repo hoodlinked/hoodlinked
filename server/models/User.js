@@ -33,12 +33,12 @@ const userSchema = new Schema({
         //     ref: 'User',
         // }
     ],
-    libraries: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Library',
-        }
-    ]
+    // libraries: [
+    //     {
+    //         type: Schema.Types.ObjectId,
+    //         ref: 'Library',
+    //     }
+    // ]
 });
 
 userSchema.pre('save', async function (next) {

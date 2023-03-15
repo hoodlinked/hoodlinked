@@ -4,17 +4,27 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-        userItems: async (parent, { username }) => {
-           return User.findOne({ username }).populate('items')
-            
-        },
+        // userItems: async (parent, { username }) => {
+        //     return User.findOne({ username }).populate('items')
+
+        // },
         library: async (parent, { _id }, context) => {
+            return Library.findOne({ _id }).populate({
+                path: 'users',
+                populate: 'items'
+            })
+        },
+        user: async (parent, args, context) => {
             if (context.user) {
                 const user = await User.findById(context.user._id).populate({
-                    path: 'libraries.users',
-                    populate: 'items'
+                    path: 'items',
+                    populate: 'name'
                 })
+
+                return user;
             }
+
+            throw new AuthenticationError('Not logged in');
         }
     },
     Mutation: {
@@ -40,15 +50,57 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-        addItem: async (parent, { owner, name, description, available }) => {
-            const item = await Item.create({ owner, name, description, available });
+        addItem: async (parent, { name, description, available }, context) => {
+            console.log(context);
+            if (context.user) {
+                const item = await Item.create({ name, description, available });
 
-            await User.findOneAndUpdate(
-                { _id: owner },
-                { $addToSet: { items: item._id } }
-            );
+                await User.findByIdAndUpdate(
+                    context.user._id,
+                    { $addToSet: { items: item._id } }
+                );
 
-            return item;
+                return item;
+            }
+
+            throw new AuthenticationError('Not logged in');
+
+        },
+        createLibrary: async (parent, { name }, context) => {
+            console.log(context);
+            if (context.user) {
+                const library = await Library.create({ name });
+
+                const user = await User.findById(context.user._id)
+
+                await Library.findByIdAndUpdate(
+                    library._id,
+                    { $addToSet: { users: user._id } }
+                );
+
+                return library;
+            }
+        },
+        addLibraryUser: async (parent, { libraryId }, context) => {
+            console.log(context);
+            if (context.user) {
+                const user = await User.findById(context.user._id)
+
+                const library = await Library.findOneAndUpdate(
+                    { _id: libraryId },
+                    {
+                        $addToSet: { users: user._id }
+                    },
+                    {
+                        new: true,
+                        runValidators: true,
+                    }
+                )
+
+                return library;
+            }
+
+            throw new AuthenticationError('Not logged in');
         }
     }
 };
