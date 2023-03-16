@@ -1,21 +1,45 @@
 import {
-    Heading,
-    Box,
-    Text,
-  } from '@chakra-ui/react'
-  
-  
-  export default function Dashboard() {
-    return (
-      <>
+  Heading,
+  Box,
+  Text,
+} from '@chakra-ui/react'
+
+import { useQuery } from '@apollo/client';
+import { QUERY_USER } from '../utils/queries';
+
+export default function Dashboard() {
+
+  const { data } = useQuery(QUERY_USER);
+  let user;
+
+  if (data) {
+    user = data.user;
+  }  
+
+  return (
+    <>
+      <Box maxW='32rem'>
+        <Heading mb={4}>Welcome to Dashboard!</Heading>
+        <Text fontSize='xl'>
+          Manage your groups and itmes from the Dashboard
+        </Text>
+      </Box>
+
+      {user ? (
         <Box maxW='32rem'>
-          <Heading mb={4}>Welcome to Dashboard!</Heading>
-          <Text fontSize='xl'>
-            A tool-share app for sharing items with your communities
-          </Text>
-        </Box>
-      </>
-  
-    )
-  }
-  
+        <Heading mb={4}>You're logged in!</Heading>
+        <Text fontSize='xl'>
+          Dashboard
+        </Text>
+      </Box>
+      ): 
+      <Box maxW='32rem'>
+        <Heading mb={4}>You're not logged in!</Heading>
+        <Text fontSize='xl'>
+          Login or sign-up to view the Dashboard
+        </Text>
+      </Box>}
+      
+    </>
+  )
+}

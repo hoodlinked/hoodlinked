@@ -23,7 +23,7 @@ mutation Login($email: String!, $password: String!) {
       }
     }
   }  
-`
+`;
 
 export const ADD_ITEM = gql`
 mutation AddItem($name: String!, $description: String!, $available: Boolean!) {
@@ -33,7 +33,7 @@ mutation AddItem($name: String!, $description: String!, $available: Boolean!) {
     available
   }
 }
-  `
+`
 
 export const CREATE_LIBRARY = gql`
   mutation CreateLibrary( $name: String!) {
