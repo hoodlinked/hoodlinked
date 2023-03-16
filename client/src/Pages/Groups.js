@@ -3,7 +3,7 @@ import {
     Box,
     Text,
   } from '@chakra-ui/react'
-  
+  import Cards from '../components/Cards'
   
   export default function Dashboard() {
     return (
@@ -14,6 +14,7 @@ import {
             A tool-share app for sharing items with your communities
           </Text>
         </Box>
+        <Cards />
       </>
   
     )
