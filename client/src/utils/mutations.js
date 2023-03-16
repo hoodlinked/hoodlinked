@@ -26,11 +26,10 @@ mutation Login($email: String!, $password: String!) {
 `;
 
 export const ADD_ITEM = gql`
-mutation AddItem($name: String!, $description: String!, $available: Boolean!) {
-  addItem(name: $name, description: $description, available: $available) {
+mutation AddItem($name: String!, $description: String!) {
+  addItem(name: $name, description: $description) {
     name
     description
-    available
   }
 }
 `

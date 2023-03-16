@@ -13,7 +13,6 @@ const typeDefs = gql`
         name: String!
         description: String!
         owner: User
-        available: Boolean!
     }
 
     type Category {
@@ -44,7 +43,7 @@ const typeDefs = gql`
     type Mutation {
         addUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!):Auth
-        addItem(name: String!, description: String!, available: Boolean!): Item
+        addItem(name: String!, description: String! ): Item
         createLibrary(name: String!): Library
         addLibraryUser(
             libraryId: ID!
