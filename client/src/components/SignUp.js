@@ -35,7 +35,7 @@ function SignUp(props) {
       <h2>Signup</h2>
       <form onSubmit={handleFormSubmit}>
         <div className="flex-row space-between my-2">
-          <label htmlFor="firstName">Username:</label>
+          <label htmlFor="username">Username:</label>
           <input
             placeholder="Username"
             name="username"

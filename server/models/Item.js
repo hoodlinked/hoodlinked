@@ -16,10 +16,10 @@ const itemSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    available: {
-        type: Boolean, 
-        required: true
-    },
+    // available: {
+    //     type: Boolean, 
+    //     required: true
+    // },
     category: {
         type: Schema.Types.ObjectId,
         ref: 'Category'

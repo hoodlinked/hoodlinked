@@ -50,10 +50,10 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-        addItem: async (parent, { name, description, available }, context) => {
+        addItem: async (parent, { name, description }, context) => {
             console.log(context);
             if (context.user) {
-                const item = await Item.create({ name, description, available });
+                const item = await Item.create({ name, description });
 
                 await User.findByIdAndUpdate(
                     context.user._id,

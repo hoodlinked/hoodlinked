@@ -5,7 +5,7 @@ import { LOGIN_USER } from '../utils/mutations';
 import auth from '../utils/auth';
 
 
-const LoginForm = (props) => {
+const LoginForm = () => {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error }] = useMutation(LOGIN_USER);
 
