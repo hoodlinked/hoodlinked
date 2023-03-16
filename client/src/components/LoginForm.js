@@ -3,12 +3,14 @@ import { useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { LOGIN_USER } from '../utils/mutations';
 import auth from '../utils/auth';
+import { useNavigate } from "react-router-dom";
 
 
 const LoginForm = () => {
+  
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error }] = useMutation(LOGIN_USER);
-
+  const navigate = useNavigate();
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -29,7 +31,7 @@ const LoginForm = () => {
       [name]: value,
     });
   };
-
+ 
   return (
     <div className="container my-1">
 
@@ -61,7 +63,9 @@ const LoginForm = () => {
           </div>
         ) : null}
         <div className="flex-row flex-end">
-          <button type="submit">Submit</button>
+          <button onClick={() => {
+          navigate('/dashboard');
+        }}>Submit</button>
         </div>
       </form>
     </div>

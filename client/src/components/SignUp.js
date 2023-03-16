@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { ADD_USER } from '../utils/mutations';
+import { useNavigate } from "react-router-dom";
 
 function SignUp(props) {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [addUser] = useMutation(ADD_USER);
-
+  const navigate = useNavigate();
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const mutationResponse = await addUser({
@@ -65,7 +66,9 @@ function SignUp(props) {
           />
         </div>
         <div className="flex-row flex-end">
-          <button type="submit">Submit</button>
+          <button onClick={() => {
+          navigate('/dashboard');
+        }}>Submit</button>
         </div>
       </form>
     </div>
