@@ -5,6 +5,7 @@ import {
 } from '@chakra-ui/react'
 
 import Item from '../components/Item';
+import AddLibrary from '../components/AddLibrary';
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useQuery } from '@apollo/client';
@@ -36,6 +37,7 @@ export default function Dashboard() {
             Dashboard
           </Text>
           <Item/>
+          <AddLibrary/>
         </Box>
       ) :
         <Box maxW='32rem'>
