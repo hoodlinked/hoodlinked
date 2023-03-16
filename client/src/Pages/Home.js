@@ -21,12 +21,8 @@ export default function Home() {
           A tool-share app for sharing items with your communities
         </Text>
       </Box>
-      <LoginForm onClick={() => {
-           navigate("/Dashboard");
-        }}/>
-      <SignUp onClick={() => {
-          navigate("/Dashboard");
-        }}/>
+      <LoginForm />
+      <SignUp />
     </div>
 
   )

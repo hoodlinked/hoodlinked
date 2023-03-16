@@ -8,18 +8,26 @@ import { useNavigate } from "react-router-dom";
 function SignUp(props) {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [addUser] = useMutation(ADD_USER);
+
   const navigate = useNavigate();
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const mutationResponse = await addUser({
-      variables: {
-        email: formState.email,
-        password: formState.password,
-        username: formState.username,
-      },
-    });
-    const token = mutationResponse.data.addUser.token;
-    Auth.login(token);
+    try {
+      const mutationResponse = await addUser({
+        variables: {
+          email: formState.email,
+          password: formState.password,
+          username: formState.username,
+        },
+      });
+      const token = mutationResponse.data.addUser.token;
+      Auth.login(token);
+      navigate('/dashboard')
+    } catch (error) {
+      console.log(error);
+    }
+
   };
 
   const handleChange = (event) => {
@@ -66,9 +74,7 @@ function SignUp(props) {
           />
         </div>
         <div className="flex-row flex-end">
-          <button onClick={() => {
-          navigate('/dashboard');
-        }}>Submit</button>
+          <button>Submit</button>
         </div>
       </form>
     </div>

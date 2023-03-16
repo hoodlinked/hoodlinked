@@ -10,7 +10,9 @@ const LoginForm = () => {
   
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error }] = useMutation(LOGIN_USER);
+
   const navigate = useNavigate();
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -19,6 +21,7 @@ const LoginForm = () => {
       });
       const token = mutationResponse.data.login.token;
       auth.login(token);
+      navigate('/dashboard')
     } catch (e) {
       console.log(e);
     }
@@ -63,9 +66,7 @@ const LoginForm = () => {
           </div>
         ) : null}
         <div className="flex-row flex-end">
-          <button onClick={() => {
-          navigate('/dashboard');
-        }}>Submit</button>
+          <button >Submit</button>
         </div>
       </form>
     </div>
