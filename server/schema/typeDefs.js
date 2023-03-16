@@ -38,6 +38,7 @@ const typeDefs = gql`
         userItems(username: String!): User 
         user: User
         library(_id: ID!): Library
+        libraries: [Library]
     }
 
     type Mutation {

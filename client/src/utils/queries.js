@@ -12,6 +12,12 @@ query UserItems($username: String!) {
   }  
 `
 
+export const QUERY_LIBRARIES = gql`
+query Libraries {
+    name
+}
+`
+
 export const QUERY_LIBRARY = gql`
 query Library($id: ID!) {
   library(_id: $id) {
