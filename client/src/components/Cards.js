@@ -73,27 +73,33 @@ class Cards extends Component {
                 <Flex>
                     <SimpleGrid>
                         {this.state.data.map(library => (
-                            <Card key={library.name} maxW='sm'>
-                                <CardBody>
-                                    <Image
-                                        src='https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-                                        alt='Green double couch with wooden legs'
-                                        borderRadius='lg'
-                                    />
-                                    <Stack mt='6' spacing='3'>
+                            <Card key={library.name}
+                                direction={{ base: 'column', sm: 'row' }}
+                                overflow='hidden'
+                                variant='outline'
+                                
+                            >
+                                <Image
+                                    objectFit='cover'
+                                    maxW={{ base: '100%', sm: '200px' }}
+                                    src='https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60'
+                                    alt='Caffe Latte'
+                                />
+                                <Stack align='center' >
+                                    <CardBody >
                                         <Heading size='md'>{library.name}</Heading>
-                                    </Stack>
-                                </CardBody>
-                                <Divider />
-                                <CardFooter>
-                                    <Center my='6'>
-                                        <ButtonGroup spacing='2'>
-                                            <Button variant='solid' colorScheme='blue'>
-                                                <a href="mailto:xxxxiheartyouxxxxx@example.com">Email owner to join group</a>
-                                            </Button>
-                                        </ButtonGroup>
-                                    </Center>
-                                </CardFooter>
+
+                                        <Text py='2'>
+                                            Maybe put member(user) count here?
+                                        </Text>
+                                    </CardBody>
+
+                                    <CardFooter>
+                                        <Button variant='solid' colorScheme='blue'>
+                                            <a href="mailto:xxxxiheartyouxxxxx@example.com">Email owner to join group</a>
+                                        </Button>
+                                    </CardFooter>
+                                </Stack>
                             </Card>
                         )
                         )
