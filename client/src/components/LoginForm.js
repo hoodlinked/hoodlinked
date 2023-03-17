@@ -74,6 +74,7 @@ const LoginForm = () => {
           variant="solid"
           colorScheme="teal"
           width="full"
+          marginTop={5}
         >
           Login
         </Button>

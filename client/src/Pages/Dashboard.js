@@ -14,6 +14,7 @@ import { QUERY_USER } from '../utils/queries';
 export default function Dashboard() {
 
   const { data } = useQuery(QUERY_USER);
+  console.log(data);
   let user;
 
   if (data) {
@@ -23,24 +24,15 @@ export default function Dashboard() {
 
   return (
     <>
-      <Box maxW='32rem'>
-        <Heading mb={4}>Welcome to Dashboard!</Heading>
-        <Text fontSize='xl'>
-          Manage your groups and items from the Dashboard
-        </Text>
-      </Box>
-
       {user ? (
-        <Box maxW='32rem'>
-          <Heading mb={4}>You're logged in!</Heading>
-          <Text fontSize='xl'>
-            Dashboard
-          </Text>
+        <Box>
+          <Heading mb={4}>Welcome, {user.username}!</Heading>
+        
           <Item/>
           <AddLibrary/>
         </Box>
       ) :
-        <Box maxW='32rem'>
+        <Box>
           <Heading mb={4}>You're not logged in!</Heading>
           <Text fontSize='xl'>
             Login or sign-up to view the Dashboard

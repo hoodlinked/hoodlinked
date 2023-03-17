@@ -37,6 +37,8 @@ query Library($id: ID!) {
 export const QUERY_USER = gql`
 query User {  
   user {
+    username
+    email
     items {
       name
       description

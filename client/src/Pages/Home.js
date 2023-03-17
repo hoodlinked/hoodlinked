@@ -36,7 +36,7 @@ return (
       borderRadius="lg"
       borderWidth="1px"
     >
-      <Text fontSize="4xl" fontFamily="Rubik Iso"   fontWeight="extrabold" color="teal"
+      <Text fontSize="4xl" fontFamily="Rubik Iso"   fontWeight="extrabold" color="teal" textAlign="center"
 >
       Welcome to Hoodlinked!
       </Text>

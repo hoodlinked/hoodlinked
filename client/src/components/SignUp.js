@@ -77,6 +77,7 @@ function SignUp(props) {
                 variant="solid"
                 colorScheme="teal"
                 width="full"
+                marginTop={5}
               >
                 Submit
               </Button>
