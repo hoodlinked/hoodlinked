@@ -16,6 +16,7 @@ import Home from './Pages/Home'
 import Dashboard from './Pages/Dashboard'
 import Groups from './Pages/Groups'
 import LoginForm from './components/LoginForm'
+import { Container } from '@chakra-ui/react';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -38,7 +39,7 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <>
+  <Container bg="#BBF1F1" maxW="full" minH="100vh">
     <ApolloProvider client={client}> 
             <Nav />
             <Routes>
@@ -47,7 +48,7 @@ function App() {
               <Route path="/groups" element={<Groups />}/>
             </Routes>
     </ApolloProvider>
-    </>
+  </Container>
 
   );
 }
