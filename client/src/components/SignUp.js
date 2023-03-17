@@ -8,7 +8,7 @@ import {
   useToast, Button, FormControl, FormLabel, Input, InputGroup, InputRightElement,
   VStack,
 }
-from "@chakra-ui/react";
+  from "@chakra-ui/react";
 
 function SignUp(props) {
   const [formState, setFormState] = useState({ email: '', password: '' });
@@ -45,8 +45,8 @@ function SignUp(props) {
 
   return (
     <div className="container my-1">
-
-      <FormControl isRequired onSubmit={handleFormSubmit}>
+      <form onSubmit={handleFormSubmit}>
+        <FormControl isRequired >
           <FormLabel htmlFor="username">Username:</FormLabel>
           <Input
             placeholder="Username"
@@ -71,17 +71,19 @@ function SignUp(props) {
             id="pwd"
             onChange={handleChange}
           />
-        <Button
-                borderRadius={0}
-                type="submit"
-                variant="solid"
-                colorScheme="teal"
-                width="full"
-                marginTop={5}
-              >
-                Submit
-              </Button>
-      </FormControl>
+          <Button
+            borderRadius={0}
+            type="submit"
+            variant="solid"
+            colorScheme="teal"
+            width="full"
+            marginTop={5}
+          >
+            Submit
+          </Button>
+        </FormControl>
+      </form>
+
     </div>
   );
 }

@@ -7,7 +7,7 @@ import {
 export default function Nav() {
     return (
 
-        <Breadcrumb>
+        <Breadcrumb bg='tomato' borderRadius='md' w='100%' p={4} color='white'px={4} h={20}>
             <BreadcrumbItem>
                 <BreadcrumbLink href='/'>
                     Home

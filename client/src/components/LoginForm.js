@@ -44,41 +44,43 @@ const LoginForm = () => {
 
   return (
     <div className="container my-1">
+      <form onSubmit={handleFormSubmit}>
+        <FormControl isRequired >
+          <FormLabel htmlFor="email">Email:</FormLabel>
+          <Input
+            placeholder="email@test.com"
+            name="email"
+            type="email"
+            id="email"
+            onChange={handleChange}
+          />
+          <FormHelperText>We'll never share your email.</FormHelperText>
+          <FormLabel htmlFor="pwd">Password:</FormLabel>
+          <Input
+            placeholder="********"
+            name="password"
+            type="password"
+            id="pwd"
+            onChange={handleChange}
+          />
+          {error ? (
+            <div>
+              <p className="error-text">The provided credentials are incorrect</p>
+            </div>
+          ) : null}
+          <Button
+            borderRadius={0}
+            type="submit"
+            variant="solid"
+            colorScheme="teal"
+            width="full"
+            marginTop={5}
+          >
+            Login
+          </Button>
+        </FormControl>
+      </form>
 
-      <FormControl isRequired onSubmit={handleFormSubmit}>
-        <FormLabel htmlFor="email">Email:</FormLabel>
-        <Input
-          placeholder="email@test.com"
-          name="email"
-          type="email"
-          id="email"
-          onChange={handleChange}
-        />
-        <FormHelperText>We'll never share your email.</FormHelperText>
-        <FormLabel htmlFor="pwd">Password:</FormLabel>
-        <Input
-          placeholder="********"
-          name="password"
-          type="password"
-          id="pwd"
-          onChange={handleChange}
-        />
-        {error ? (
-          <div>
-            <p className="error-text">The provided credentials are incorrect</p>
-          </div>
-        ) : null}
-        <Button
-          borderRadius={0}
-          type="submit"
-          variant="solid"
-          colorScheme="teal"
-          width="full"
-          marginTop={5}
-        >
-          Login
-        </Button>
-      </FormControl>
     </div>
   );
 }

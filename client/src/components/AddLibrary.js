@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import auth from '../utils/auth';
 import { CREATE_LIBRARY } from '../utils/mutations';
-import { Button,}
-  from "@chakra-ui/react";
+import { QUERY_LIBRARIES } from '../utils/queries';
 
-function AddLibrary() {
+function AddLibrary () {
+
+    const { data } = useQuery(QUERY_LIBRARIES);
+    let library;
+
+    if (data) {
+        library = data.libraries; 
+        console.log(library)
+    }
 
     const libraryName = document.getElementById('libraryName')
 
@@ -33,7 +40,7 @@ function AddLibrary() {
 
     return (
         <>
-            <div className="container my-1">
+        <div className="container my-1">
                 <h5>Create a new group for people in your community to join</h5>
                 <div className="col-lg">
                     <form onSubmit={handleFormSubmit}>
@@ -50,14 +57,27 @@ function AddLibrary() {
                             />
                         </div>
                         <div className="form-group mb-3">
-                            <Button colorScheme='blue'
-                                type="submit">Add Group</Button>
+                            <button type="submit">Add Group</button>
                         </div>
                     </form>
+                </div>
+                <div>
+                    {library? (
+                        <>
+                        <h5>Libraries:</h5>
+                        {library.map(({ name }) => (
+                            <div key={library._id} className="my-2">
+                            <p>{name}</p>
+                            </div>
+                        ))}
+                        </>
+                    ) :
+                        null
+                    }
                 </div>
             </div>
         </>
     )
-}
+}   
 
 export default AddLibrary;
