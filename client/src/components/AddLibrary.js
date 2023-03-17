@@ -39,6 +39,8 @@ function AddLibrary () {
         });
 
         libraryName.value = "";
+        document.location.reload(); 
+
     };
 
     const handleChange = (event) => {
