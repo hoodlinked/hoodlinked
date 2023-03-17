@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 
 import {
     Container, Card, Text, CardBody, CardFooter, Image, Stack, Heading, Divider, Button, ButtonGroup,
@@ -68,6 +67,7 @@ class Cards extends Component {
     // },
     // ]
     render() {
+
         return (
         <Container>
             <Flex>
@@ -82,14 +82,6 @@ class Cards extends Component {
                                 />
                                 <Stack mt='6' spacing='3'>
                                     <Heading size='md'>{ library.name }</Heading>
-                                    {/* <Text>
-                                        This sofa is perfect for modern tropical spaces, baroque inspired
-                                        spaces, earthy toned spaces and for people who love a chic design with a
-                                        sprinkle of vintage design.
-                                    </Text> */}
-                                    {/* <Text color='blue.600' fontSize='2xl'>
-                                    $450
-                                </Text> */}
                                 </Stack>
                             </CardBody>
                             <Divider />
@@ -99,9 +91,6 @@ class Cards extends Component {
                                         <Button variant='solid' colorScheme='blue'>
                                             Email owner to join group
                                         </Button>
-                                        {/* <Button variant='ghost' colorScheme='blue'>
-                                        Add to cart
-                                    </Button> */}
                                     </ButtonGroup>
                                 </Center>
                             </CardFooter>
@@ -117,23 +106,7 @@ class Cards extends Component {
 }
 
 export default Cards;
-// const groupLoader = async () => {
-//     const res = await fetch('http://localhost:3001/graphql', {
-//         method: 'POST',
 
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
 
-//         body: JSON.stringify({
-//             query: `query Library {
-//                 libraries {
-//                   name
-//                 }
-//               }`
-//         })
-//     })
-//     const libraries = await res.json()
-//     return (libraries.data.libraries)
-// }
+
 

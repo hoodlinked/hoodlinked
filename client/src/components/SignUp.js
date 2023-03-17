@@ -4,6 +4,11 @@ import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { ADD_USER } from '../utils/mutations';
 import { useNavigate } from "react-router-dom";
+import {
+  useToast, Button, FormControl, FormLabel, Input, InputGroup, InputRightElement,
+  VStack,
+}
+from "@chakra-ui/react";
 
 function SignUp(props) {
   const [formState, setFormState] = useState({ email: '', password: '' });
@@ -41,7 +46,6 @@ function SignUp(props) {
   return (
     <div className="container my-1">
 
-      <h2>Signup</h2>
       <form onSubmit={handleFormSubmit}>
         <div className="flex-row space-between my-2">
           <label htmlFor="username">Username:</label>
@@ -66,7 +70,7 @@ function SignUp(props) {
         <div className="flex-row space-between my-2">
           <label htmlFor="pwd">Password:</label>
           <input
-            placeholder="******"
+            placeholder="**"
             name="password"
             type="password"
             id="pwd"
@@ -74,7 +78,15 @@ function SignUp(props) {
           />
         </div>
         <div className="flex-row flex-end">
-          <button>Submit</button>
+        <Button
+                borderRadius={0}
+                type="submit"
+                variant="solid"
+                colorScheme="teal"
+                width="full"
+              >
+                Submit
+              </Button>
         </div>
       </form>
     </div>

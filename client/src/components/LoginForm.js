@@ -4,10 +4,16 @@ import { Link } from 'react-router-dom';
 import { LOGIN_USER } from '../utils/mutations';
 import auth from '../utils/auth';
 import { useNavigate } from "react-router-dom";
+import {
+  useToast, Button, FormControl, FormLabel, Input, InputGroup, InputRightElement,
+  VStack,
+}
+  from "@chakra-ui/react";
+
 
 
 const LoginForm = () => {
-  
+
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error }] = useMutation(LOGIN_USER);
 
@@ -34,11 +40,9 @@ const LoginForm = () => {
       [name]: value,
     });
   };
- 
   return (
     <div className="container my-1">
 
-      <h2>Login</h2>
       <form onSubmit={handleFormSubmit}>
         <div className="flex-row space-between my-2">
           <label htmlFor="email">Email:</label>
@@ -53,7 +57,7 @@ const LoginForm = () => {
         <div className="flex-row space-between my-2">
           <label htmlFor="pwd">Password:</label>
           <input
-            placeholder="******"
+            placeholder="**"
             name="password"
             type="password"
             id="pwd"
@@ -66,7 +70,15 @@ const LoginForm = () => {
           </div>
         ) : null}
         <div className="flex-row flex-end">
-          <button >Submit</button>
+        <Button
+                borderRadius={0}
+                type="submit"
+                variant="solid"
+                colorScheme="teal"
+                width="full"
+              >
+               Login
+              </Button>
         </div>
       </form>
     </div>

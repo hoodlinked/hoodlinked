@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import auth from '../utils/auth';
 import { ADD_ITEM } from '../utils/mutations';
+import { Button } from '@chakra-ui/react'
 
 function Item() {
 
@@ -85,7 +86,7 @@ function Item() {
                             />
                         </div> */}
                         <div className="form-group mb-3">
-                            <button type="submit">Add Item</button>
+                            <Button colorScheme='blue'type="submit">Add Item</Button>
                         </div>
                     </form>
                 </div>
