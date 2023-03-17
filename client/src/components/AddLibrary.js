@@ -3,6 +3,16 @@ import { useMutation, useQuery } from '@apollo/client';
 import auth from '../utils/auth';
 import { CREATE_LIBRARY } from '../utils/mutations';
 import { QUERY_LIBRARIES } from '../utils/queries';
+import { 
+    Box,
+    Heading, 
+    Text,
+    Button,
+    FormControl,
+    FormLabel,
+    Input,
+    VStack,
+} from '@chakra-ui/react'
 
 function AddLibrary () {
 
@@ -40,42 +50,51 @@ function AddLibrary () {
 
     return (
         <>
-        <div className="container my-1">
-                <h5>Create a new group for people in your community to join</h5>
-                <div className="col-lg">
-                    <form onSubmit={handleFormSubmit}>
-                        <div className="form-group mb-3">
-                            <label htmlFor="name">Group Name:</label>
-                            <p></p>
-                            <input
-                                className="form-control"
-                                placeholder="My Group"
-                                name="name"
-                                type="name"
-                                id="libraryName"
-                                onChange={handleChange}
-                            />
+         <Box borderWidth="1px" borderColor="gray.200" borderRadius="lg" p="4" margin="2rem 0">
+            <div>
+                {library? (
+                    <>
+                    {library.map(({ name }) => (
+                        <div key={library._id} className="my-2">
+                        <p>{name}</p>
                         </div>
-                        <div className="form-group mb-3">
-                            <button type="submit">Add Group</button>
-                        </div>
-                    </form>
-                </div>
-                <div>
-                    {library? (
-                        <>
-                        <h5>Libraries:</h5>
-                        {library.map(({ name }) => (
-                            <div key={library._id} className="my-2">
-                            <p>{name}</p>
-                            </div>
-                        ))}
-                        </>
-                    ) :
-                        null
-                    }
-                </div>
+                    ))}
+                    </>
+                ) :
+                    null
+                }
             </div>
+        </Box>
+
+        <Box borderWidth="1px" borderColor="gray.200" borderRadius="lg" p="4">
+        <VStack align="stretch">
+            <Heading as="h5" size="md" mb="2">
+                Create a new group for people in your community to join
+            </Heading>
+                <form onSubmit={handleFormSubmit}>
+                <FormControl isRequired>
+                        <FormLabel htmlFor="name">
+                            Group Name:
+                        </FormLabel>
+                        <Input
+                            placeholder="My Group"
+                            name="name"
+                            type="text"
+                            id="libraryName"
+                            onChange={handleChange}
+                        />
+                    </FormControl>
+                    <Button 
+                        borderRadius={0}
+                        type="submit"
+                        variant="solid"
+                        colorScheme="teal"
+                        width="full"
+                        marginTop={5}
+                        >Add Group</Button>
+                </form>
+        </VStack>
+        </Box>
         </>
     )
 }   
