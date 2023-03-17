@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import auth from '../utils/auth';
 import { ADD_ITEM } from '../utils/mutations';
-import { Button } from '@chakra-ui/react'
+import { QUERY_USER } from '../utils/queries';
 
 function Item() {
+
+    const { data } = useQuery(QUERY_USER);
+    let user;
+
+    if (data) {
+        user = data.user;
+    }
 
     const itemName = document.getElementById('itemName')
     const itemDescription = document.getElementById('itemDescription')
 
-    const [formState, setFormState] = useState({ name: '', description: ''});
+    const [formState, setFormState] = useState({ name: '', description: '' });
     const [addItem] = useMutation(ADD_ITEM);
 
     const handleFormSubmit = async (event) => {
@@ -62,33 +69,19 @@ function Item() {
                                 onChange={handleChange}
                             />
                         </div>
-                        {/* <div className="form-check">
-                            <input
-                                class="form-check-input"
-                                type="checkbox"
-                                value="true"
-                                id="flexCheckDefault"
-                                name="available"
-                                onChange={handleChange}
-                            />
-                            <label htmlFor="available" class="form-check-label" for="flexCheckDefault">
-                                Available
-                            </label>
-                        </div>
-
                         <div className="form-group mb-3">
-                            <label htmlFor="available">Available</label>
-                            <input
-                                name="available"
-                                type="checkbox"
-                                id="available"
-                                onChange={handleChange}
-                            />
-                        </div> */}
-                        <div className="form-group mb-3">
-                            <Button colorScheme='blue'type="submit">Add Item</Button>
+                            <button type="submit">Add Item</button>
                         </div>
                     </form>
+                </div>
+                <div>
+                    <h5>{user.username}'s Items: </h5>
+                    {user.items.map(({ name, description }, index) => (
+                        <div key={index} className="my-2">
+                            <p>{name}</p>
+                            <p>{description}</p>
+                        </div>
+                    ))}
                 </div>
             </div>
         </>

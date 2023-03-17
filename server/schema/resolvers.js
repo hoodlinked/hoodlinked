@@ -15,8 +15,10 @@ const resolvers = {
             })
         },
         libraries: async () => {
-            return Library.find()
-
+            return await Library.find().populate({
+                path: 'users',
+                populate: 'items'
+            })
         },
         user: async (parent, args, context) => {
             if (context.user) {
