@@ -5,6 +5,7 @@ import {
   } from '@chakra-ui/react'
   
   import Cards from '../components/Cards'
+import Join from '../components/Join'
 
 
   export default function Dashboard() {
@@ -16,7 +17,10 @@ import {
             A tool-share app for sharing items with your communities
           </Text>
         </Box>
-        <Cards />
+        <Cards>
+                  {/* <Join /> */}
+        </Cards>
+
       </>
   
     )

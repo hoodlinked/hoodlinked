@@ -5,11 +5,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
+import { ChakraProvider } from '@chakra-ui/react';
 
 
 ReactDOM.render(
   <BrowserRouter>
+  <ChakraProvider> 
     <App />
+    </ChakraProvider>
   </BrowserRouter>,
   document.getElementById('root')
 );
