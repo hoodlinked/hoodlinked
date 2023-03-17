@@ -5,7 +5,7 @@ import { LOGIN_USER } from '../utils/mutations';
 import auth from '../utils/auth';
 import { useNavigate } from "react-router-dom";
 import {
-  useToast, Button, FormControl, FormLabel, Input, InputGroup, InputRightElement,
+  useToast, Button, FormControl, FormHelperText, FormLabel, Input, InputGroup, InputRightElement,
   VStack,
 }
   from "@chakra-ui/react";
@@ -40,47 +40,44 @@ const LoginForm = () => {
       [name]: value,
     });
   };
+
+
   return (
     <div className="container my-1">
 
-      <form onSubmit={handleFormSubmit}>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="email">Email:</label>
-          <input
-            placeholder="email@test.com"
-            name="email"
-            type="email"
-            id="email"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="pwd">Password:</label>
-          <input
-            placeholder="**"
-            name="password"
-            type="password"
-            id="pwd"
-            onChange={handleChange}
-          />
-        </div>
+      <FormControl isRequired onSubmit={handleFormSubmit}>
+        <FormLabel htmlFor="email">Email:</FormLabel>
+        <Input
+          placeholder="email@test.com"
+          name="email"
+          type="email"
+          id="email"
+          onChange={handleChange}
+        />
+        <FormHelperText>We'll never share your email.</FormHelperText>
+        <FormLabel htmlFor="pwd">Password:</FormLabel>
+        <Input
+          placeholder="********"
+          name="password"
+          type="password"
+          id="pwd"
+          onChange={handleChange}
+        />
         {error ? (
           <div>
             <p className="error-text">The provided credentials are incorrect</p>
           </div>
         ) : null}
-        <div className="flex-row flex-end">
         <Button
-                borderRadius={0}
-                type="submit"
-                variant="solid"
-                colorScheme="teal"
-                width="full"
-              >
-               Login
-              </Button>
-        </div>
-      </form>
+          borderRadius={0}
+          type="submit"
+          variant="solid"
+          colorScheme="teal"
+          width="full"
+        >
+          Login
+        </Button>
+      </FormControl>
     </div>
   );
 }
