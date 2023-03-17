@@ -40,6 +40,7 @@ function Item() {
 
         itemDescription.value = "";
         itemName.value = "";
+        document.location.reload(); 
     };
 
     const handleChange = (event) => {

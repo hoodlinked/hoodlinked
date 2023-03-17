@@ -31,6 +31,18 @@ const resolvers = {
             }
 
             throw new AuthenticationError('Not logged in');
+        },
+        findUserLibraries: async (parent, args, context) => {
+            if (context.user) {
+
+                const libraries = await Library.find({
+                    users: context.user._id,
+                })
+                
+                return libraries
+            }
+
+            throw new AuthenticationError('Not logged in');
         }
     },
     Mutation: {
@@ -63,7 +75,8 @@ const resolvers = {
 
                 await User.findByIdAndUpdate(
                     context.user._id,
-                    { $addToSet: { items: item._id } }
+                    { $addToSet: { items: item._id } },
+                    {new: true}
                 );
 
                 return item;
@@ -81,7 +94,8 @@ const resolvers = {
 
                 await Library.findByIdAndUpdate(
                     library._id,
-                    { $addToSet: { users: user._id } }
+                    { $addToSet: { users: user._id } },
+                    {new: true}
                 );
 
                 return library;
