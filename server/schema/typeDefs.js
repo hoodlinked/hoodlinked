@@ -39,6 +39,7 @@ const typeDefs = gql`
         user: User
         library(_id: ID!): Library
         libraries: [Library]
+        findUserLibraries: [Library]
     }
 
     type Mutation {
@@ -48,8 +49,7 @@ const typeDefs = gql`
         createLibrary(name: String!): Library
         addLibraryUser(
             libraryId: ID!
-        ): Library
-        
+        ): Library       
     }
 `;
 

@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import auth from '../utils/auth';
 import { CREATE_LIBRARY } from '../utils/mutations';
-import { QUERY_LIBRARIES } from '../utils/queries';
-import { 
+import { QUERY_USER_LIBRARY } from '../utils/queries';
+import {
     Box,
-    Heading, 
+    Heading,
     Text,
     Button,
     FormControl,
@@ -14,13 +14,13 @@ import {
     VStack,
 } from '@chakra-ui/react'
 
-function AddLibrary () {
+function AddLibrary() {
 
-    const { data } = useQuery(QUERY_LIBRARIES);
+    const { data } = useQuery(QUERY_USER_LIBRARY);
     let library;
 
     if (data) {
-        library = data.libraries; 
+        library = data.findUserLibraries;
         console.log(library)
     }
 
@@ -53,6 +53,7 @@ function AddLibrary () {
 
     return (
         <>
+
         <Box borderWidth="1px" borderColor="gray.200" bgGradient='linear(to-r, orange.500, orange.300)' borderRadius="lg" p="4" display="flex" flexDirection="row" justifyContent="space-between" alignItems="center" flexWrap="wrap" margin="2rem 0">
                 {library? (
                     <>
@@ -110,6 +111,6 @@ function AddLibrary () {
         </Box> )}
         </>
     )
-}   
+}
 
 export default AddLibrary;

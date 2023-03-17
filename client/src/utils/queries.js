@@ -46,3 +46,10 @@ query User {
   }
 }
 `
+export const QUERY_USER_LIBRARY = gql`
+query FindUserLibraries {
+  findUserLibraries {
+    name
+  }
+}
+`
