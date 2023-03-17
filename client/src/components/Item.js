@@ -3,6 +3,16 @@ import { useMutation, useQuery } from '@apollo/client';
 import auth from '../utils/auth';
 import { ADD_ITEM } from '../utils/mutations';
 import { QUERY_USER } from '../utils/queries';
+import {
+    Box,
+    Heading,
+    Text,
+    Button,
+    FormControl,
+    FormLabel,
+    Input,
+    Textarea
+} from '@chakra-ui/react'
 
 function Item() {
 
@@ -42,48 +52,60 @@ function Item() {
 
     return (
         <>
-            <div className="container my-1">
-                <h5>Add an item to your list to share with people in your groups</h5>
-                <div className="col-lg">
-                    <form onSubmit={handleFormSubmit}>
-                        <div className="form-group mb-3">
-                            <label htmlFor="name">Item Name:</label>
-                            <input
-                                className="form-control"
-                                placeholder="Item"
-                                name="name"
-                                type="name"
-                                id="itemName"
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className="form-group mb-3">
-                            <label htmlFor="description">Description:</label>
-                            <p>Provide a description to let other users know important details, like size, piece count, etc.</p>
-                            <textarea
-                                className="form-control"
-                                placeholder="Item Description"
-                                name="description"
-                                type="Textarea"
-                                id="itemDescription"
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className="form-group mb-3">
-                            <button type="submit">Add Item</button>
-                        </div>
-                    </form>
+        <Box borderWidth="1px" borderColor="gray.200" borderRadius="lg" p="4" display="flex" flexDirection="row" justifyContent="space-between" alignItems="center" flexWrap="wrap" margin="2rem 0">
+            {user.items.map(({ name, description }, index) => (
+            <Box borderWidth="1px" borderColor="gray.200" borderRadius="lg" p="4" width={{ base: "100%", sm: "48%", md: "30%" }}>
+                <div key={index} className="my-2">
+                    <Heading as="h5" size="md" mb="2">{name}</Heading>
+                    <Text>{description}</Text>
                 </div>
-                <div>
-                    <h5>{user.username}'s Items: </h5>
-                    {user.items.map(({ name, description }, index) => (
-                        <div key={index} className="my-2">
-                            <p>{name}</p>
-                            <p>{description}</p>
-                        </div>
-                    ))}
-                </div>
-            </div>
+            </Box>
+            ))}
+        </Box>
+
+        <Box borderWidth="1px" borderColor="gray.200" borderRadius="lg" p="4">
+        <Heading as="h5" size="md" mb="2">
+            Add an item to your list to share with people in your groups
+        </Heading>
+        <div className="col-lg">
+            <form onSubmit={handleFormSubmit}>
+                <FormControl isRequired>
+                    <FormLabel htmlFor="itemName">Item Name:</FormLabel>
+                    <Input
+                        placeholder="Item"
+                        name="name"
+                        type="name"
+                        id="itemName"
+                        value={formState.name}
+                        onChange={handleChange}
+                    />
+                </FormControl>
+                <FormControl isRequired>
+                    <FormLabel htmlFor="itemDescription">Description:</FormLabel>
+                    <Textarea
+                        placeholder="Item Description"
+                        name="description"
+                        type="Textarea"
+                        id="itemDescription"
+                        value={formState.description}
+                        onChange={handleChange}
+                    />
+                </FormControl>
+                <Button
+                borderRadius={0}
+                type="submit"
+                variant="solid"
+                colorScheme="teal"
+                width="full"
+                marginTop={5}
+                >
+                        Add Item
+                </Button>
+            </form>
+        </div>
+        </Box>
+
+
         </>
     )
 }
