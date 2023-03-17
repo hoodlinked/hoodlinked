@@ -28,6 +28,7 @@ function AddLibrary () {
 
     const [formState, setFormState] = useState({ name: '' })
     const [createLibrary] = useMutation(CREATE_LIBRARY);
+    const [showForm, setShowForm] = useState(false); // new state variable
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -50,23 +51,32 @@ function AddLibrary () {
 
     return (
         <>
-         <Box borderWidth="1px" borderColor="gray.200" borderRadius="lg" p="4" margin="2rem 0">
-            <div>
+        <Box borderWidth="1px" borderColor="gray.200" bgGradient='linear(to-r, orange.500, orange.300)' borderRadius="lg" p="4" display="flex" flexDirection="row" justifyContent="space-between" alignItems="center" flexWrap="wrap" margin="2rem 0">
                 {library? (
                     <>
                     {library.map(({ name }) => (
+                    <Box bg="white" margin="1rem 0" borderWidth="1px" borderColor="gray.200" borderRadius="lg" p="4" width={{ base: "100%", sm: "48%", md: "30%" }}>
+
                         <div key={library._id} className="my-2">
                         <p>{name}</p>
                         </div>
+                    </Box>
                     ))}
                     </>
                 ) :
                     null
                 }
-            </div>
         </Box>
 
-        <Box borderWidth="1px" borderColor="gray.200" borderRadius="lg" p="4">
+
+        {/* New button to toggle the form */}
+        <Button onClick={() => setShowForm(!showForm)} variant="solid" colorScheme="orange" margin="1rem 0">
+            {showForm ? 'Hide form' : 'New Library +'}
+        </Button>
+
+        {/* Show the form only if showForm is true */}
+        {showForm && (
+        <Box borderWidth="1px" borderColor="gray.200" bg='orange.100' borderRadius="lg" p="4">
         <VStack align="stretch">
             <Heading as="h5" size="md" mb="2">
                 Create a new group for people in your community to join
@@ -81,6 +91,7 @@ function AddLibrary () {
                             name="name"
                             type="text"
                             id="libraryName"
+                            bg="white"
                             onChange={handleChange}
                         />
                     </FormControl>
@@ -88,13 +99,13 @@ function AddLibrary () {
                         borderRadius={0}
                         type="submit"
                         variant="solid"
-                        colorScheme="teal"
+                        colorScheme="orange"
                         width="full"
                         marginTop={5}
                         >Add Group</Button>
                 </form>
         </VStack>
-        </Box>
+        </Box> )}
         </>
     )
 }   

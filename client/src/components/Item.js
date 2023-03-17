@@ -28,6 +28,7 @@ function Item() {
 
     const [formState, setFormState] = useState({ name: '', description: '' });
     const [addItem] = useMutation(ADD_ITEM);
+    const [showForm, setShowForm] = useState(false); // new state variable
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -52,9 +53,9 @@ function Item() {
 
     return (
         <>
-        <Box borderWidth="1px" borderColor="gray.200" borderRadius="lg" p="4" display="flex" flexDirection="row" justifyContent="space-between" alignItems="center" flexWrap="wrap" margin="2rem 0">
+        <Box borderWidth="1px" borderColor="gray.200" bgGradient='linear(to-r, orange.500, orange.300)' borderRadius="lg" p="4" display="flex" flexDirection="row" justifyContent="space-between" alignItems="center" flexWrap="wrap" margin="2rem 0">
             {user.items.map(({ name, description }, index) => (
-            <Box borderWidth="1px" borderColor="gray.200" borderRadius="lg" p="4" width={{ base: "100%", sm: "48%", md: "30%" }}>
+            <Box bg="white" margin="1rem 0" borderWidth="1px" borderColor="gray.200" borderRadius="lg" p="4" width={{ base: "100%", sm: "48%", md: "30%" }}>
                 <div key={index} className="my-2">
                     <Heading as="h5" size="md" mb="2">{name}</Heading>
                     <Text>{description}</Text>
@@ -63,7 +64,14 @@ function Item() {
             ))}
         </Box>
 
-        <Box borderWidth="1px" borderColor="gray.200" borderRadius="lg" p="4">
+        {/* New button to toggle the form */}
+        <Button onClick={() => setShowForm(!showForm)} variant="solid" colorScheme="orange" margin="1rem 0">
+            {showForm ? 'Hide form' : 'New item +'}
+        </Button>
+
+        {/* Show the form only if showForm is true */}
+        {showForm && (
+        <Box borderWidth="1px" borderColor="gray.200" bg='orange.100' borderRadius="lg" p="4">
         <Heading as="h5" size="md" mb="2">
             Add an item to your list to share with people in your groups
         </Heading>
@@ -76,6 +84,7 @@ function Item() {
                         name="name"
                         type="name"
                         id="itemName"
+                        bg="white"
                         value={formState.name}
                         onChange={handleChange}
                     />
@@ -87,6 +96,7 @@ function Item() {
                         name="description"
                         type="Textarea"
                         id="itemDescription"
+                        bg="white"
                         value={formState.description}
                         onChange={handleChange}
                     />
@@ -95,7 +105,7 @@ function Item() {
                 borderRadius={0}
                 type="submit"
                 variant="solid"
-                colorScheme="teal"
+                colorScheme="orange"
                 width="full"
                 marginTop={5}
                 >
@@ -103,8 +113,7 @@ function Item() {
                 </Button>
             </form>
         </div>
-        </Box>
-
+        </Box> )}
 
         </>
     )
