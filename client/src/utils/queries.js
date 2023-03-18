@@ -1,15 +1,17 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_USER_ITEMS = gql`
-query UserItems($username: String!) {
-    userItems(username: $username) {
-      username
-      items {
-        name
-        description
-      }
+query UserItems($userId: ID!) {
+  userItems(userId: $userId) {
+    email
+    _id
+    username
+    items {
+      name
+      description
     }
-  }  
+  }
+} 
 `
 
 export const QUERY_LIBRARIES = gql`
@@ -21,14 +23,19 @@ query Library {
 `
 
 export const QUERY_LIBRARY = gql`
-query Library($id: ID!) {
-  library(_id: $id) {
+query Library($libraryId: ID!) {
+  library(libraryId: $libraryId) {
     _id
+    name
     users {
+      _id
+      username
+      email
       items {
         name
         description
       }
+      
     }
   }
 }
@@ -50,6 +57,7 @@ export const QUERY_USER_LIBRARY = gql`
 query FindUserLibraries {
   findUserLibraries {
     name
+    _id
   }
 }
 `

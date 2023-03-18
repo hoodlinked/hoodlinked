@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
 import auth from '../utils/auth';
 import { CREATE_LIBRARY } from '../utils/mutations';
@@ -16,6 +17,7 @@ import {
 
 function AddLibrary() {
 
+    // querying data for libraries user has joined
     const { data } = useQuery(QUERY_USER_LIBRARY);
     let library;
 
@@ -37,9 +39,9 @@ function AddLibrary() {
                 name: formState.name
             },
         });
-
+        // clearing form fields and reloading page for rendering
         libraryName.value = "";
-        document.location.reload(); 
+        document.location.reload();
 
     };
 
@@ -54,61 +56,68 @@ function AddLibrary() {
     return (
         <>
 
-        <Box borderWidth="1px" borderColor="gray.200" bgGradient='linear(to-r, orange.500, orange.300)' borderRadius="lg" p="4" display="flex" flexDirection="row" justifyContent="space-between" alignItems="center" flexWrap="wrap" margin="2rem 0">
-                {library? (
+            <Box borderWidth="1px" borderColor="gray.200" bgGradient='linear(to-r, orange.500, orange.300)' borderRadius="lg" p="4" display="flex" flexDirection="row" justifyContent="space-between" alignItems="center" flexWrap="wrap" margin="2rem 0">
+                {library ? (
                     <>
-                    {library.map(({ name }) => (
-                    <Box bg="white" margin="1rem 0" borderWidth="1px" borderColor="gray.200" borderRadius="lg" p="4" width={{ base: "100%", sm: "48%", md: "30%" }}>
+                        {/* mapping all libraries logged in user has joined */}
+                        {library.map(({ _id, name }, index) => (
+                            <Box bg="white" margin="1rem 0" borderWidth="1px" borderColor="gray.200" borderRadius="lg" p="4" width={{ base: "100%", sm: "48%", md: "30%" }}>
+                                <Link
+                                    to={`/library/${_id}`}
+                                >
+                                    <div key={index} className="my-2">
+                                        {/* linking every library to library page */}
 
-                        <div key={library._id} className="my-2">
-                        <p>{name}</p>
-                        </div>
-                    </Box>
-                    ))}
+                                        <p>{name}</p>
+
+                                    </div>
+                                </Link>
+                            </Box>
+                        ))}
                     </>
                 ) :
                     null
                 }
-        </Box>
+            </Box>
 
 
-        {/* New button to toggle the form */}
-        <Button onClick={() => setShowForm(!showForm)} variant="solid" colorScheme="orange" margin="1rem 0">
-            {showForm ? 'Hide form' : 'New Library +'}
-        </Button>
+            {/* New button to toggle the form */}
+            <Button onClick={() => setShowForm(!showForm)} variant="solid" colorScheme="orange" margin="1rem 0">
+                {showForm ? 'Hide form' : 'New Library +'}
+            </Button>
 
-        {/* Show the form only if showForm is true */}
-        {showForm && (
-        <Box borderWidth="1px" borderColor="gray.200" bg='orange.100' borderRadius="lg" p="4">
-        <VStack align="stretch">
-            <Heading as="h5" size="md" mb="2">
-                Create a new group for people in your community to join
-            </Heading>
-                <form onSubmit={handleFormSubmit}>
-                <FormControl isRequired>
-                        <FormLabel htmlFor="name">
-                            Group Name:
-                        </FormLabel>
-                        <Input
-                            placeholder="My Group"
-                            name="name"
-                            type="text"
-                            id="libraryName"
-                            bg="white"
-                            onChange={handleChange}
-                        />
-                    </FormControl>
-                    <Button 
-                        borderRadius={0}
-                        type="submit"
-                        variant="solid"
-                        colorScheme="orange"
-                        width="full"
-                        marginTop={5}
-                        >Add Group</Button>
-                </form>
-        </VStack>
-        </Box> )}
+            {/* Show the form only if showForm is true */}
+            {showForm && (
+                <Box borderWidth="1px" borderColor="gray.200" bg='orange.100' borderRadius="lg" p="4">
+                    <VStack align="stretch">
+                        <Heading as="h5" size="md" mb="2">
+                            Create a new group for people in your community to join
+                        </Heading>
+                        <form onSubmit={handleFormSubmit}>
+                            <FormControl isRequired>
+                                <FormLabel htmlFor="name">
+                                    Group Name:
+                                </FormLabel>
+                                <Input
+                                    placeholder="My Group"
+                                    name="name"
+                                    type="text"
+                                    id="libraryName"
+                                    bg="white"
+                                    onChange={handleChange}
+                                />
+                            </FormControl>
+                            <Button
+                                borderRadius={0}
+                                type="submit"
+                                variant="solid"
+                                colorScheme="orange"
+                                width="full"
+                                marginTop={5}
+                            >Add Group</Button>
+                        </form>
+                    </VStack>
+                </Box>)}
         </>
     )
 }

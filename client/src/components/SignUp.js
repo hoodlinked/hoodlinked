@@ -44,7 +44,6 @@ function SignUp(props) {
   };
 
   return (
-    <div className="container my-1">
       <form onSubmit={handleFormSubmit}>
         <FormControl isRequired >
           <FormLabel htmlFor="username">Username:</FormLabel>
@@ -83,8 +82,6 @@ function SignUp(props) {
           </Button>
         </FormControl>
       </form>
-
-    </div>
   );
 }
 

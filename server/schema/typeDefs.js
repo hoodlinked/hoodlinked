@@ -35,9 +35,9 @@ const typeDefs = gql`
     }
 
     type Query {
-        userItems(username: String!): User 
+        userItems(userId: ID!): User 
         user: User
-        library(_id: ID!): Library
+        library(libraryId: ID!): Library
         libraries: [Library]
         findUserLibraries: [Library]
     }
