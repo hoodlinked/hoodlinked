@@ -9,7 +9,7 @@ import { useMutation, useQuery } from '@apollo/client';
 
 import { QUERY_LIBRARIES, QUERY_USER } from "../utils/queries";
 
-function Cards() {
+function CardsContext () {
     const { data } = useQuery(QUERY_LIBRARIES);
     const { userData } = useQuery(QUERY_USER);
     let library;
@@ -19,12 +19,6 @@ function Cards() {
         library = data.libraries;
         console.log("---library---")
         console.log(library)
-
-
-        // if (userData) {
-        //     user = userData.user;
-        //     console.log("---user---")
-        // }
     }
 
     return (
@@ -67,9 +61,9 @@ function Cards() {
                                             </CardBody>
 
                                             <CardFooter>
-                                                {/* <Button variant='solid' colorScheme='blue'>
-                                                    <a href="mailto:xxxxiheartyouxxxxx@example.com">Login to Join this Group</a>
-                                                </Button> */}
+                                                <Button variant='solid' colorScheme='blue'>
+                                                    <a href="mailto:xxxxiheartyouxxxxx@example.com">Join this Group</a>
+                                                </Button>
                                             </CardFooter>
                                         </Stack>
                                     </Card>
@@ -85,4 +79,4 @@ function Cards() {
     )
 }
 
-export default Cards;
+export default CardsContext;

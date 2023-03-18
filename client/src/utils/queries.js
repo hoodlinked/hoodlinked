@@ -14,10 +14,18 @@ query UserItems($userId: ID!) {
 } 
 `
 
+// expanded Query Libaries to render items in library cards
 export const QUERY_LIBRARIES = gql`
-query Library {
+query Libraries {
   libraries {
+    _id
     name
+    users {
+      username
+      items {
+        name
+      }
+    }
   }
 }
 `
