@@ -12,13 +12,12 @@ import {
 
 function SignUp(props) {
   const [formState, setFormState] = useState({ email: '', password: '' });
-  const [addUser] = useMutation(ADD_USER);
+  const [addUser, { error }] = useMutation(ADD_USER);
 
   const navigate = useNavigate();
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    try {
       const mutationResponse = await addUser({
         variables: {
           email: formState.email,
@@ -28,11 +27,8 @@ function SignUp(props) {
       });
       const token = mutationResponse.data.addUser.token;
       Auth.login(token);
-      navigate('/dashboard')
-    } catch (error) {
-      console.log(error);
-    }
-
+      document.location.href ='/dashboard'
+      // navigate('/dashboard')
   };
 
   const handleChange = (event) => {
@@ -70,6 +66,12 @@ function SignUp(props) {
             id="pwd"
             onChange={handleChange}
           />
+                    {/* gives error messages if username or email already exists */}
+          {error ? (
+            <div>
+              <p className="error-text">That username and email combination already exists</p>
+            </div>
+          ) : null}
           <Button
             borderRadius={0}
             type="submit"

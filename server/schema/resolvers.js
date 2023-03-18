@@ -9,10 +9,12 @@ const resolvers = {
 
         },
         library: async (parent, { libraryId }, context) => {
-            return Library.findById({ _id: libraryId }).populate({
-                path: 'users',
-                populate: 'items'
-            })
+            if (context.user) {
+                return Library.findById({ _id: libraryId }).populate({
+                    path: 'users',
+                    populate: 'items'
+                })
+            }
         },
         libraries: async (parent, args, context) => {
             return await Library.find().populate({
@@ -38,7 +40,7 @@ const resolvers = {
                 const libraries = await Library.find({
                     users: context.user._id,
                 })
-                
+
                 return libraries
             }
 
@@ -76,7 +78,7 @@ const resolvers = {
                 await User.findByIdAndUpdate(
                     context.user._id,
                     { $addToSet: { items: item._id } },
-                    {new: true}
+                    { new: true }
                 );
 
                 return item;
@@ -95,7 +97,7 @@ const resolvers = {
                 await Library.findByIdAndUpdate(
                     library._id,
                     { $addToSet: { users: user._id } },
-                    {new: true}
+                    { new: true }
                 );
 
                 return library;

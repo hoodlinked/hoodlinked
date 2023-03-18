@@ -1,5 +1,13 @@
 import {
     Heading,
+    Card,
+    CardHeader,
+    CardBody,
+    Stack,
+    StackDivider,
+    Box,
+    Text,
+    Button,
 } from '@chakra-ui/react';
 
 import React from 'react';
@@ -24,23 +32,38 @@ export default function User() {
         username = user.username
         console.log(data);
         console.log(username)
-        
+
     }
 
     return (
         <>
             {user ? (
                 <>
-                    <Heading mb="4">{user.username}'s Page</Heading>
-                    <div> {user.username}'s Items: </div>
-                    
-                    {user.items.map(({ name, description }, index) => (
-                            <div key={index}>
-                                <p>{name}</p>
-                                <p>{description}</p>
-                                <p><a href={`mailto:${email}?&subject=Is%20Your%20${name}%20available?&body=Hi%20${username},%20I%20am%20interested%20in%20borrowing%20your%20${name}%20let%20me%20know%20if%20it%20is%20available!`}>Email {username} about borrowing {name}</a></p>
-                            </div>
-                        ))}
+                    <Card>
+                        <CardHeader>
+                            <Heading mb="4">
+                                {user.username}'s Page
+                            </Heading>
+                        </CardHeader>
+                        <CardBody>
+                            <Stack divider={<StackDivider />} spacing='4'>
+                                <Heading size='md'> 
+                                {user.username}'s Items: 
+                                </Heading>
+                                {user.items.map(({ name, description }, index) => (
+                                    <Box key={index}>
+                                        <Heading size='sm'>
+                                            {name}
+                                        </Heading>
+                                        <Text>{description}</Text>
+                                        <Button variant="solid" colorScheme="orange" margin="1rem 0">
+                                            <a target="_blank" href={`mailto:${email}?&subject=Is%20Your%20${name}%20available?&body=Hi%20${username},%20I%20am%20interested%20in%20borrowing%20your%20${name}%20let%20me%20know%20if%20it%20is%20available!`}>Email {username} about borrowing {name}</a>
+                                        </Button>
+                                    </Box>
+                                ))}
+                            </Stack>
+                        </CardBody>
+                    </Card>
                 </>
             ) :
                 null
