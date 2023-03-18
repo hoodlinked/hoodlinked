@@ -12,11 +12,11 @@ import { setContext } from '@apollo/client/link/context';
 import './App.css';
 
 import Nav from './components/Nav';
-import Home from './Pages/Home'
-import Dashboard from './Pages/Dashboard'
-import Groups from './Pages/Groups'
-import LoginForm from './components/LoginForm'
-import { Container } from '@chakra-ui/react';
+import Home from './Pages/Home';
+import Dashboard from './Pages/Dashboard';
+import Groups from './Pages/Groups';
+import User from './Pages/User';
+import Library from './Pages/Library';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -39,16 +39,18 @@ const client = new ApolloClient({
 
 function App() {
   return (
-  <Container bg="#BBF1F1" maxW="full" minH="100vh">
+    <>
     <ApolloProvider client={client}> 
             <Nav />
             <Routes>
               <Route path="/" element={<Home />}/>
               <Route path="/dashboard" element={<Dashboard />}/>
               <Route path="/groups" element={<Groups />}/>
+              <Route path="/user/:userId" element={<User/>}/>
+              <Route path="/library/:libraryId" element={<Library />}/>
             </Routes>
     </ApolloProvider>
-  </Container>
+    </>
 
   );
 }

@@ -4,12 +4,12 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-        // userItems: async (parent, { username }) => {
-        //     return User.findOne({ username }).populate('items')
+        userItems: async (parent, { userId }) => {
+            return User.findById({ _id: userId }).populate('items')
 
-        // },
-        library: async (parent, { _id }, context) => {
-            return Library.findOne({ _id }).populate({
+        },
+        library: async (parent, { libraryId }, context) => {
+            return Library.findById({ _id: libraryId }).populate({
                 path: 'users',
                 populate: 'items'
             })
