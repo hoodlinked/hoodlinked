@@ -5,14 +5,12 @@ const typeDefs = gql`
         _id: ID
         name: String 
         users: [User]
-        creator: User
     }
 
     type Item {
         _id: ID
         name: String!
         description: String!
-        owner: User
     }
 
     type Category {

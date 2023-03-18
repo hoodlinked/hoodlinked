@@ -6,7 +6,7 @@ import {
 } from '@chakra-ui/react'
 
 import Item from '../components/Item';
-import React, { useState , useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import AddLibrary from '../components/AddLibrary';
 import LoginForm from '../components/LoginForm'
 import SignUp from '../components/SignUp'
@@ -43,27 +43,27 @@ export default function Dashboard() {
   return (
     <>
       {user ? (
-      <Flex direction="row" height="100%">
-        <Box w="25%" bg="gray.100">
-          <Box p="4">
-            <Avatar size="lg" src={user.avatarUrl} />
-            <Heading mt="4" mb="2">Hello, {user.username}!</Heading>
-            <Text fontSize="xl">{user.email}</Text>
+        <Flex direction="row" height="100%">
+          <Box w="25%" bg="gray.100">
+            <Box p="4">
+              <Avatar size="lg" src={user.avatarUrl} />
+              <Heading mt="4" mb="2">Hello, {user.username}!</Heading>
+              <Text fontSize="xl">{user.email}</Text>
+            </Box>
           </Box>
-        </Box>
-      <Box w="75%" bg="white" p="4">
-        <Heading mb="4">My Items</Heading>
-          <Item />
-        <Divider margin="3rem 0"/>
-        <Heading mb="4">My Libraries</Heading>
-          <AddLibrary />
-      </Box>
-      </Flex>
+          <Box w="75%" bg="white" p="4">
+            <Heading mb="4">My Items</Heading>
+            <Item />
+            <Divider margin="3rem 0" />
+            <Heading mb="4">My Libraries</Heading>
+            <AddLibrary />
+          </Box>
+        </Flex>
 
-    ) : (
-     
+      ) : (
+
         <>
-        <Flex flexDirection="column" alignItems="center" my="4rem" p="3rem">
+          <Flex flexDirection="column" alignItems="center" my="4rem" p="3rem">
             <Image src="hoodlinked-logo.png" alt="Hoodlinked Logo" width="200px" height="200px" mb="2rem" />
             <Text fontSize="3xl" fontWeight="bold" mb="2rem" textAlign="center">
               Welcome to Hoodlinked!
@@ -74,7 +74,7 @@ export default function Dashboard() {
             <Button onClick={() => setShowSignUpForm(!showSignUpForm)} variant="solid" colorScheme="orange" margin="1rem 0">
               {showSignUpForm ? 'Hide form' : 'Sign up for free'}
             </Button>
-              {showSignUpForm && (
+            {showSignUpForm && (
               <SignUp />
             )}
 
@@ -87,7 +87,7 @@ export default function Dashboard() {
           </Flex>
 
         </>
-        )}
+      )}
 
     </>
   )

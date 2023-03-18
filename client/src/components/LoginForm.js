@@ -21,16 +21,13 @@ const LoginForm = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    try {
       const mutationResponse = await login({
         variables: { email: formState.email, password: formState.password },
       });
       const token = mutationResponse.data.login.token;
       auth.login(token);
-      navigate('/dashboard')
-    } catch (e) {
-      console.log(e);
-    }
+      document.location.href ='/dashboard'
+      // navigate('/dashboard')
   }
 
   const handleChange = (event) => {
@@ -63,9 +60,10 @@ const LoginForm = () => {
             id="pwd"
             onChange={handleChange}
           />
+          {/* gives error messages if password or email do not match */}
           {error ? (
             <div>
-              <p className="error-text">The provided credentials are incorrect</p>
+              <p className="error-text">The email and password provided do not match our databse; please try again</p>
             </div>
           ) : null}
           <Button
