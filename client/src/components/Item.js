@@ -103,11 +103,9 @@ function Item() {
                     />
                 </FormControl>
                 <Button
-                borderRadius={0}
                 type="submit"
                 variant="solid"
                 colorScheme="orange"
-                width="full"
                 marginTop={5}
                 >
                         Add Item
