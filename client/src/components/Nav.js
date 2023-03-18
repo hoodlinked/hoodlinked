@@ -49,8 +49,12 @@ export default function Nav() {
   return (
     <>
         {!isLargerThan768 && (
-            <Flex alignItems="center" justifyContent="space-between" bg='orange.500' w='100%' p={4} color='white'>
+            <Flex alignItems="center" bg='orange.500' w='100%' p={4} color='white'>
                 <Button as={HamburgerIcon} variant="unstyled" w={8} h={8} onClick={() => setIsDrawerOpen(true)} />
+            <Flex flexGrow={1} justifyContent="center">
+                    <FontAwesomeIcon icon={faPeopleArrows} size="2x" style={{ marginRight: '1rem' }}/>
+                    <Heading style={{ fontSize: '1.5rem' }} textTransform="uppercase" textAlign="center">Hoodlinked</Heading>
+                </Flex>
             </Flex>
         )}
 
@@ -61,7 +65,7 @@ export default function Nav() {
 
             <Flex alignItems="center" justifyContent="left" px="1rem">
             <FontAwesomeIcon icon={faPeopleArrows} size="2x"/>
-            <DrawerHeader style={{ fontSize: '1.5rem' }}>Hoodlinked</DrawerHeader>
+            <DrawerHeader style={{ fontSize: '1.5rem' }} textTransform="uppercase">Hoodlinked</DrawerHeader>
             </Flex>
            
 
@@ -81,14 +85,16 @@ export default function Nav() {
                     </>
                 ) : 
                 (
+                    <Flex flexDirection="column" justifyContent="center" alignItems="center" minHeight="100vh">
                     <Box>
-                      <Heading mb={4}>You're not logged in!</Heading>
-                      <Text fontSize='xl'>
-                        <Link color="white" textDecoration="underline"  href='/'>
+                      <Heading mb={4} textAlign="center">You're not logged in!</Heading>
+                      <Text fontWeight="medium" textTransform="uppercase" color="white" textAlign="center">
+                        <Link color="white" textDecoration="underline" _hover={{ color: "gray.600" }} href='/'>
                         Login or sign-up to view the Dashboard
                         </Link>
                       </Text>
                     </Box>
+                    </Flex>
                 ) 
             }
                 
