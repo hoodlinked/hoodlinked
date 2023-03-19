@@ -126,7 +126,7 @@ function Item() {
 
                         <AlertDialog
                             isOpen={alertStates[index]}
-                            leastDestructiveRef={cancelRef}
+                            // leastDestructiveRef={cancelRef}
                             onClose={() => handleAlertClose(index)}
                         >
                             <AlertDialogOverlay>
@@ -140,7 +140,7 @@ function Item() {
                                 </AlertDialogBody>
 
                                 <AlertDialogFooter>
-                                <Button ref={cancelRef} onClick={onClose}>
+                                <Button ref={cancelRef} onClick={() => { handleAlertClose(index); onClose(); }}>
                                     Cancel
                                 </Button>
                                 <Button colorScheme='red' onClick={() => handleDelete(_id)} ml={3}>

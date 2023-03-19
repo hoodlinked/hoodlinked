@@ -36,12 +36,10 @@ export default function AddLibraryUser() {
     return (
         <form onSubmit={handleFormSubmit}>
                 <Button
-                    borderRadius={0}
                     type="submit"
                     variant="solid"
                     colorScheme="orange"
-                    width="full"
-                    marginTop={5}
+                    _hover={{ color: "gray.600" }}
                 >
                     Share your Items with this group
                 </Button>

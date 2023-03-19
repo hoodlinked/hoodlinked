@@ -9,6 +9,7 @@ import {
     StackDivider,
     Box,
     Text,
+    Flex
 } from '@chakra-ui/react';
 
 import React from 'react';
@@ -37,11 +38,16 @@ export default function Library() {
 
     return (
         <>
+
+
+
             {library ? (
+                <Flex flexWrap="wrap" justifyContent="center">
                 <>
-                    <Card>
+
+                    <Card mt={10} bg="orange.100">
                         <CardHeader>
-                            <Heading>
+                            <Heading color="orange.500" textAlign="center">
                                 {library.name}
                             </Heading>
                         </CardHeader>
@@ -49,11 +55,13 @@ export default function Library() {
                             <Stack divider={<StackDivider />} spacing='4'>
                                 {library.users.map((user) => (
                                     <Box key={user._id}>
-                                        <Heading size='md'>
-                                            Items from <Link to={`/user/${user._id}`}>{user.username}</Link>
+                                        <Heading textAlign="center" size='md'>
+                                            <Link to={`/user/${user._id}`}>{user.username}</Link>'s items
                                         </Heading>
                                         {user.items.map(({ name, description }, index) => (
-                                            <Box key={index}>
+                                            <Box
+                                            m={5}
+                                             key={index}>
                                                 <Heading size='sm'>
                                                     {name}
                                                 </Heading>
@@ -61,26 +69,31 @@ export default function Library() {
                                             </Box>
                                         ))}
                                         <Stack spacing={4} direction='row' align='center'>
-                                            <Button variant="solid" colorScheme="orange" margin="1rem 0">
+                                            <Button variant="solid" colorScheme="orange" margin="1rem 0" _hover={{ color: "gray.600" }}>
                                                 <a target="_blank" href={`mailto:${user.email}`}>Email {user.username}</a>
                                             </Button>
-                                            <Button variant="solid" colorScheme="orange" margin="1rem 0">
-                                                <Link to={`/user/${user._id}`}>
+                                            <Button variant="solid" colorScheme="orange" margin="1rem 0" _hover={{ color: "gray.600" }}>
+                                                <Link to={`/user/${user._id}`} _hover={{ color: "gray.600" }}>
                                                     Go to {user.username}'s page
                                                 </Link>
                                             </Button>
+                                            <AddLibraryUser />
                                         </Stack>
                                     </Box>
                                 ))}
+
                             </Stack>
                         </CardBody>
                     </Card>
 
-                    <AddLibraryUser />
                 </>
+                </Flex>
             ) :
                 null
             }
+
+
+
         </>
     )
 }
