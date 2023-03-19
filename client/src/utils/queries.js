@@ -55,6 +55,7 @@ query User {
     username
     email
     items {
+      _id
       name
       description
     }

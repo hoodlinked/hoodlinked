@@ -49,3 +49,26 @@ export const ADD_LIBRARY_USER = gql`
     }
   }
   `
+
+export const REMOVE_ITEM = gql`
+  mutation RemoveItem($itemId: ID!) {
+  removeItem(itemId: $itemId) {
+    username
+    items {
+      _id
+    }
+  }
+}
+`
+
+export const REMOVE_LIBRARY_USER = gql`
+mutation RemoveLibraryUser($libraryId: ID!) {
+  removeLibraryUser(libraryId: $libraryId) {
+    _id
+    name
+    users {
+      username
+    }
+  }
+}
+`
