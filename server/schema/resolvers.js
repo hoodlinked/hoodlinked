@@ -22,6 +22,9 @@ const resolvers = {
                 populate: 'items'
             })
         },
+        libraryItems: async (parent, {libraryId}, context) => {
+            return await Library.findById(libraryId).populate('items')
+        },
         searchLibraries: async (parent, {itemName}) => {
             const libraries = await Library.find().populate({
                 path: 'users',
@@ -166,7 +169,27 @@ const resolvers = {
             }
 
             throw new AuthenticationError("You must be logged in!");
-        }
+        },
+        addLibraryItem: async (parent, {libraryId, itemId }, context) => {
+            if (context.user) {
+                const item = await Item.findById(itemId);
+
+                const library = await Library.findByIdAndUpdate(
+                    libraryId, 
+                    {
+                        $addToSet: { items: item._id }
+                    }, 
+                    {
+                        new: true,
+                        runValidators: true,
+                    }
+                ).populate('items');
+
+                return library
+            }
+
+            throw new AuthenticationError('Not logged in')
+        },
     }
 };
 

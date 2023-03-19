@@ -72,3 +72,14 @@ mutation RemoveLibraryUser($libraryId: ID!) {
   }
 }
 `
+export const ADD_LIBRARY_ITEM = gql`
+mutation addLibraryItem($libraryId: ID!, $itemId: ID!) {
+  addLibraryItem(libraryId: $libraryId, itemId: $itemId) {
+    name
+    items {
+      name
+      description
+    }
+  }
+}
+`
