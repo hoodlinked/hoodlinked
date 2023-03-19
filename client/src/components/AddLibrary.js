@@ -16,13 +16,23 @@ import {
     FormLabel,
     Input,
     VStack,
+    Flex,
 } from '@chakra-ui/react'
+
+import {
+    AlertDialog,
+    AlertDialogBody,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogContent,
+    AlertDialogOverlay,
+  } from '@chakra-ui/react'
 
 function AddLibrary() {
 
     // querying data for libraries user has joined
     const { data } = useQuery(QUERY_USER_LIBRARY);
-    let library;
+    let library = [];
 
     if (data) {
         library = data.findUserLibraries;
@@ -34,6 +44,12 @@ function AddLibrary() {
     const [formState, setFormState] = useState({ name: '' })
     const [createLibrary] = useMutation(CREATE_LIBRARY);
     const [showForm, setShowForm] = useState(false); // new state variable
+    const [removeLibraryUser] = useMutation(REMOVE_LIBRARY_USER);
+    const [isAlertOpen, setIsAlertOpen] = useState(false);
+    const [alertStates, setAlertStates] = useState(library.map(() => false));
+
+    const onClose = () => setIsAlertOpen(false);
+
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -48,6 +64,18 @@ function AddLibrary() {
 
     };
 
+
+    const handleRemoveLibraryUser = async (_id, index) => {
+        const mutationResponse = await removeLibraryUser({
+            variables: { libraryId: _id }
+        });
+
+        const updatedAlertStates = [...alertStates];
+        updatedAlertStates[index] = false;
+        setAlertStates(updatedAlertStates);        
+        document.location.reload();
+    }
+
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormState({
@@ -56,19 +84,30 @@ function AddLibrary() {
         });
     }
 
-    const [removeLibraryUser] = useMutation(REMOVE_LIBRARY_USER);
 
-    const handleRemoveLibraryUser = async (_id) => {
-        const mutationResponse = await removeLibraryUser({
-            variables: { libraryId: _id }
-        });
+    const handleDelete = async (_id, index) => {
+        await handleRemoveLibraryUser(_id, index);
+        onClose();
+      };      
 
-        document.location.reload();
-    }
+
+    const cancelRef = React.useRef();
+
+    const handleAlertOpen = (index) => {
+        const updatedAlertStates = [...alertStates];
+        updatedAlertStates[index] = true;
+        setAlertStates(updatedAlertStates);
+    };
+
+    const handleAlertClose = (index) => {
+        const updatedAlertStates = [...alertStates];
+        updatedAlertStates[index] = false;
+        setAlertStates(updatedAlertStates);
+    };
+   
 
     return (
         <>
-
             <Box borderWidth="1px" borderColor="gray.200" bgGradient='linear(to-r, orange.500, orange.300)' borderRadius="lg" p="4" display="flex" flexDirection="row" justifyContent="space-between" alignItems="center" flexWrap="wrap" margin="2rem 0">
                 {library ? (
                     <>
@@ -76,6 +115,7 @@ function AddLibrary() {
                         {library.map(({ _id, name }, index) => (
                             <Box bg="white" margin="1rem 0" borderWidth="1px" borderColor="gray.200" borderRadius="lg" p="4" width={{ base: "100%", sm: "48%", md: "30%" }}>
                                 {/* linking every library to library page */}
+                                <Flex flexDirection="column" alignItems="center">
                                 <Link
                                     to={`/library/${_id}`}
                                 >
@@ -84,12 +124,49 @@ function AddLibrary() {
                                     </Heading>
                                 </Link>
                                 <Button
-                                    className="btn-block btn-danger"
-                                    onClick={() => handleRemoveLibraryUser(_id)}
+                                    m={5}
+                                    fontSize="sm"
+                                    p="10px"
+                                    h="22px"
+                                    colorScheme="orange"
+                                    onClick={() => handleAlertOpen(index)}
                                 >
-                                    Remove Items from Group
+                                    Delete Group
                                 </Button>
+
+                                <AlertDialog
+                                    isOpen={alertStates[index]}
+                                    leastDestructiveRef={cancelRef}
+                                    onClose={() => handleAlertClose(index)}
+                        >
+                                    <AlertDialogOverlay>
+                                    <AlertDialogContent>
+                                        <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                                        Delete Item
+                                        </AlertDialogHeader>
+
+                                        <AlertDialogBody>
+                                        Are you sure you want to delete this item? This action cannot be undone.
+                                        </AlertDialogBody>
+
+                                        <AlertDialogFooter>
+                                        <Button ref={cancelRef} onClick={onClose}>
+                                            Cancel
+                                        </Button>
+                                        <Button colorScheme='red' onClick={() => handleDelete(_id)} ml={3}>
+                                            Delete
+                                        </Button>
+                                        </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                    </AlertDialogOverlay>
+                                </AlertDialog>
+
+
+
+
+                                </Flex>
                             </Box>
+                            
                         ))}
                     </>
                 ) :
@@ -125,11 +202,9 @@ function AddLibrary() {
                                 />
                             </FormControl>
                             <Button
-                                borderRadius={0}
                                 type="submit"
                                 variant="solid"
                                 colorScheme="orange"
-                                width="full"
                                 marginTop={5}
                             >Add Group</Button>
                         </form>
