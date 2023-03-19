@@ -6,7 +6,7 @@ import auth from '../utils/auth';
 import { useNavigate } from "react-router-dom";
 import {
   useToast, Button, FormControl, FormHelperText, FormLabel, Input, InputGroup, InputRightElement,
-  VStack,
+  VStack, Box
 }
   from "@chakra-ui/react";
 
@@ -40,15 +40,18 @@ const LoginForm = () => {
 
 
   return (
-    <div className="container my-1">
+    // <div className="container my-1">
+    <Box borderWidth="1px" borderColor="gray.200" bg='orange.100' borderRadius="lg" p="4">
+
       <form onSubmit={handleFormSubmit}>
         <FormControl isRequired >
           <FormLabel htmlFor="email">Email:</FormLabel>
           <Input
-            placeholder="email@test.com"
+            placeholder="email@domain.com"
             name="email"
             type="email"
             id="email"
+            bg="white"
             onChange={handleChange}
           />
           <FormHelperText>We'll never share your email.</FormHelperText>
@@ -58,6 +61,7 @@ const LoginForm = () => {
             name="password"
             type="password"
             id="pwd"
+            bg="white"
             onChange={handleChange}
           />
           {/* gives error messages if password or email do not match */}
@@ -67,10 +71,9 @@ const LoginForm = () => {
             </div>
           ) : null}
           <Button
-            borderRadius={0}
             type="submit"
             variant="solid"
-            colorScheme="teal"
+            colorScheme="orange"
             width="full"
             marginTop={5}
           >
@@ -79,7 +82,8 @@ const LoginForm = () => {
         </FormControl>
       </form>
 
-    </div>
+    {/* </div> */}
+    </Box>
   );
 }
 
