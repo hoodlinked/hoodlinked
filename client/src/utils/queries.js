@@ -70,3 +70,15 @@ query FindUserLibraries {
   }
 }
 `
+
+export const QUERY_LIBRARY_ITEMS = gql`
+query LibraryItems($libraryId: ID!) {
+  libraryItems(libraryId: $libraryId) {
+    name
+    items {
+      name
+      description
+    }
+  }
+}
+`

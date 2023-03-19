@@ -5,6 +5,7 @@ const typeDefs = gql`
         _id: ID
         name: String 
         users: [User]
+        items: [Item]
     }
 
     type Item {
@@ -39,6 +40,7 @@ const typeDefs = gql`
         libraries: [Library]
         findUserLibraries: [Library]
         searchLibraries: [Library]
+        libraryItems(libraryId: ID!): Library
     }
 
     type Mutation {
@@ -50,7 +52,8 @@ const typeDefs = gql`
             libraryId: ID!
         ): Library
         removeItem(itemId: ID!): User
-        removeLibraryUser(libraryId: ID!): Library      
+        removeLibraryUser(libraryId: ID!): Library
+        addLibraryItem(libraryId: ID!, itemId: ID!): Library      
     }
 `;
 

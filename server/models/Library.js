@@ -8,12 +8,12 @@ const librarySchema = new Schema({
         required: true,
         unique: true
     },
-    // items: [
-    //     {
-    //         type: Schema.Types.ObjectId,
-    //         ref: 'Item'
-    //     }
-    // ],
+    items: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Item'
+        }
+    ],
     users: [
         {
             type: Schema.Types.ObjectId,
