@@ -136,7 +136,7 @@ function AddLibrary() {
 
                                 <AlertDialog
                                     isOpen={alertStates[index]}
-                                    leastDestructiveRef={cancelRef}
+                                    // leastDestructiveRef={cancelRef}
                                     onClose={() => handleAlertClose(index)}
                         >
                                     <AlertDialogOverlay>
@@ -150,7 +150,7 @@ function AddLibrary() {
                                         </AlertDialogBody>
 
                                         <AlertDialogFooter>
-                                        <Button ref={cancelRef} onClick={onClose}>
+                                        <Button ref={cancelRef} onClick={() => { handleAlertClose(index); onClose(); }}>
                                             Cancel
                                         </Button>
                                         <Button colorScheme='red' onClick={() => handleDelete(_id)} ml={3}>
