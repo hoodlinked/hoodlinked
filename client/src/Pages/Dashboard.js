@@ -54,7 +54,7 @@ export default function Dashboard() {
                 <Heading mb="4">My Items</Heading>
                 <Item />
                 <Divider margin="3rem 0" />
-                <Heading mb="4">My Libraries</Heading>
+                <Heading mb="4">My Groups</Heading>
                 <AddLibrary />
               </Box>
             </>    
@@ -74,7 +74,7 @@ export default function Dashboard() {
                 <Heading mb="4">My Items</Heading>
                 <Item />
                 <Divider margin="3rem 0" />
-                <Heading mb="4">My Libraries</Heading>
+                <Heading mb="4">My Groups</Heading>
                 <AddLibrary />
               </Box>
             </>
