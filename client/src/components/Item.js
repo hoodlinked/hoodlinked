@@ -13,7 +13,18 @@ import {
     Input,
     Textarea,
     Stack,
+    Flex
 } from '@chakra-ui/react'
+
+import {
+    AlertDialog,
+    AlertDialogBody,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogContent,
+    AlertDialogOverlay,
+  } from '@chakra-ui/react'
+
 
 function Item() {
 
@@ -32,6 +43,11 @@ function Item() {
     const [formState, setFormState] = useState({ name: '', description: '' });
     const [addItem] = useMutation(ADD_ITEM);
     const [showForm, setShowForm] = useState(false); // new state variable
+    const [removeItem] = useMutation(REMOVE_ITEM);
+    const [isAlertOpen, setIsAlertOpen] = useState(false);
+    const [alertStates, setAlertStates] = useState(user.items.map(() => false));
+
+    const onClose = () => setIsAlertOpen(false);
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -47,13 +63,15 @@ function Item() {
         document.location.reload();
     };
 
-    const [removeItem] = useMutation(REMOVE_ITEM);
 
-    const handleRemoveItem = async (_id) => {
+    const handleRemoveItem = async (_id, index) => {
         const mutationResponse = await removeItem({
             variables: {itemId: _id }
         });
         
+        const updatedAlertStates = [...alertStates];
+        updatedAlertStates[index] = false;
+        setAlertStates(updatedAlertStates);        
         document.location.reload();
     }
 
@@ -65,30 +83,77 @@ function Item() {
         });
     }
 
+    const handleDelete = async (_id, index) => {
+        await handleRemoveItem(_id, index);
+        onClose();
+      };      
+
+
+    const cancelRef = React.useRef();
+
+    const handleAlertOpen = (index) => {
+        const updatedAlertStates = [...alertStates];
+        updatedAlertStates[index] = true;
+        setAlertStates(updatedAlertStates);
+    };
+
+    const handleAlertClose = (index) => {
+        const updatedAlertStates = [...alertStates];
+        updatedAlertStates[index] = false;
+        setAlertStates(updatedAlertStates);
+    };
+
+
     return (
         <>
             <Box borderWidth="1px" borderColor="gray.200" bgGradient='linear(to-r, orange.500, orange.300)' borderRadius="lg" p="4" display="flex" flexDirection="row" justifyContent="space-between" alignItems="center" flexWrap="wrap" margin="2rem 0">
-                {user.items.map(({ name, description, _id }, index) => (
-                    <Box key={index} bg="white" margin="1rem 0" borderWidth="1px" borderColor="gray.200" borderRadius="lg" p="4" width={{ base: "100%", sm: "48%", md: "30%" }}>
-                        <Heading as="h5" size="md" mb="2">{name}</Heading>
-                        <Text>{description}</Text>
-                        <Stack spacing={4} direction='row' align='center'>
-                            <Button
-                                className="btn-block btn-danger"
-                                onClick={() => handleRemoveItem(_id)}
-                            >
-                                Remove
-                            </Button>
-                            {/* <Button
-                                className="btn-block btn-danger"
-                                onClick={() => handleRemoveItem(_id)}
-                            >
-                                Edit Item
-                            </Button> */}
-                        </Stack>
+            {user.items.map(({ name, description, _id }, index) => (
+                <Box key={index} bg="white" margin="1rem 0" borderWidth="1px" borderColor="gray.200" borderRadius="lg" p="4" width={{ base: "100%", sm: "48%", md: "30%" }}>
+                    <Flex flexDirection="column" alignItems="center">
+                    <Heading as="h5" size="md" mb="2">{name}</Heading>
+                    <Text>{description}</Text>
+                    <Stack spacing={4} direction='row' align='center'>
+                        <Button
+                            m={5}
+                            fontSize="sm"
+                            p="10px"
+                            h="22px"
+                            colorScheme="orange"           
+                            onClick={() => handleAlertOpen(index)}
+                        >
+                            Remove
+                        </Button>
 
-                    </Box>
-                ))}
+                        <AlertDialog
+                            isOpen={alertStates[index]}
+                            leastDestructiveRef={cancelRef}
+                            onClose={() => handleAlertClose(index)}
+                        >
+                            <AlertDialogOverlay>
+                            <AlertDialogContent>
+                                <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                                Delete Item
+                                </AlertDialogHeader>
+
+                                <AlertDialogBody>
+                                Are you sure you want to delete this item? This action cannot be undone.
+                                </AlertDialogBody>
+
+                                <AlertDialogFooter>
+                                <Button ref={cancelRef} onClick={onClose}>
+                                    Cancel
+                                </Button>
+                                <Button colorScheme='red' onClick={() => handleDelete(_id)} ml={3}>
+                                    Delete
+                                </Button>
+                                </AlertDialogFooter>
+                            </AlertDialogContent>
+                            </AlertDialogOverlay>
+                        </AlertDialog>
+                    </Stack>
+                    </Flex>
+                </Box>
+            ))}
             </Box>
 
             {/* New button to toggle the form */}
