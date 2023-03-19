@@ -6,7 +6,7 @@ import { ADD_USER } from '../utils/mutations';
 import { useNavigate } from "react-router-dom";
 import {
   useToast, Button, FormControl, FormLabel, Input, InputGroup, InputRightElement,
-  VStack,
+  VStack,Box
 }
   from "@chakra-ui/react";
 
@@ -40,6 +40,7 @@ function SignUp(props) {
   };
 
   return (
+    <Box borderWidth="1px" borderColor="gray.200" bg='orange.100' borderRadius="lg" p="4" mb="4">
       <form onSubmit={handleFormSubmit}>
         <FormControl isRequired >
           <FormLabel htmlFor="username">Username:</FormLabel>
@@ -48,14 +49,16 @@ function SignUp(props) {
             name="username"
             type="username"
             id="username"
+            bg="white"
             onChange={handleChange}
           />
           <FormLabel htmlFor="email">Email:</FormLabel>
           <Input
-            placeholder="email@test.com"
+            placeholder="email@domain.com"
             name="email"
             type="email"
             id="email"
+            bg="white"
             onChange={handleChange}
           />
           <FormLabel htmlFor="pwd">Password:</FormLabel>
@@ -64,6 +67,7 @@ function SignUp(props) {
             name="password"
             type="password"
             id="pwd"
+            bg="white"
             onChange={handleChange}
           />
                     {/* gives error messages if username or email already exists */}
@@ -73,10 +77,9 @@ function SignUp(props) {
             </div>
           ) : null}
           <Button
-            borderRadius={0}
             type="submit"
             variant="solid"
-            colorScheme="teal"
+            colorScheme="orange"
             width="full"
             marginTop={5}
           >
@@ -84,6 +87,7 @@ function SignUp(props) {
           </Button>
         </FormControl>
       </form>
+      </Box>
   );
 }
 

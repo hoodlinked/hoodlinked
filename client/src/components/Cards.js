@@ -1,6 +1,6 @@
 import {
-    Container, Card, Text, CardBody, CardFooter, Image, Stack, Heading, Divider, Button, ButtonGroup,
-    Flex, Center, SimpleGrid
+    Card, Text, CardBody, CardFooter, Heading, Button,
+    Flex
 } from '@chakra-ui/react'
 
 import React, { useState } from 'react';
@@ -10,7 +10,7 @@ import { useMutation, useQuery } from '@apollo/client';
 
 import { QUERY_LIBRARIES, QUERY_USER } from "../utils/queries";
 
-function Cards() {
+function Cards({searchQuery}) {
     const { data } = useQuery(QUERY_LIBRARIES);
     const { userData } = useQuery(QUERY_USER);
     let library;
@@ -18,9 +18,6 @@ function Cards() {
 
     if (data) {
         library = data.libraries;
-        console.log("---library---")
-        console.log(library)
-
 
         // if (userData) {
         //     user = userData.user;
@@ -28,19 +25,37 @@ function Cards() {
         // }
     }
 
+    const filteredLibrary = library
+    ? library.filter((lib) =>
+        lib.users.some((user) =>
+          user.items.some((item) =>
+            item.name.toLowerCase().includes(searchQuery.toLowerCase())
+          )
+        )
+      )
+    : null;
+
+
     return (
-        <Container>
-            {/* <Flex>
-                <SimpleGrid> */}
-            {library ? (
+    <>            
+            {filteredLibrary && filteredLibrary.length > 0 ? (
+                <Flex flexWrap="wrap" justifyContent="center">
                 <>
-                    {library.map((library, index) => (
-                        <div key={index}>
-                            <Card>
-                                <Heading
-                                // bg="white" margin="1rem 0" borderWidth="1px" borderColor="gray.200" borderRadius="lg" p="4" width={{ base: "100%", sm: "48%", md: "30%" }}
-                                >
-                                    <p>{library.name}</p>
+                {filteredLibrary.map((library, index) => (                        <div key={index}>
+                            <Card 
+                              borderWidth="1px"
+                              minW="md"
+                              maxW="md"
+                              minH="lg"
+                              maxH="lg"
+                              borderColor="gray.200"
+                              bg="orange.100"
+                              borderRadius="lg"
+                              p="4"
+                              margin="2rem"
+                            >
+                                <Heading textAlign="center">
+                                    {library.name}
                                 </Heading>
                                 {/* <Image
                                             objectFit='cover'
@@ -48,7 +63,6 @@ function Cards() {
                                             src='https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60'
                                             alt='Caffe Latte'
                                         /> */}
-                                {/* <Stack align='center' > */}
 
                                 <CardBody >
                                     <Heading
@@ -58,8 +72,13 @@ function Cards() {
                                     </Heading>
                                     {library.users.map((user, index) => (
                                         <Text key={index}>
-                                            {/* <p>{user.username}</p> */}
-                                            {user.items.map(({ name }, index) => (
+                                            {user.items
+                                            .filter((item) =>
+                                            item.name
+                                              .toLowerCase()
+                                              .includes(searchQuery.toLowerCase())
+                                            )
+                                            .map(({ name }, index) => (
                                                 <div key={index}>
                                                     <p>{name}</p>
                                                 </div>
@@ -69,25 +88,28 @@ function Cards() {
                                 </CardBody>
 
                                 <CardFooter>
-                                    <Button variant='solid' colorScheme='orange'>
-                                        <Link
-                                            to={`/`}
-                                        >
-                                            Login or SigUp to View {library.name}'s Page
-                                        </Link>
-                                    </Button>
+                                    <Flex justifyContent="center" alignItems="center" width="100%">
+
+                                        <Button 
+                                        variant='solid' colorScheme='orange'>
+                                            <Link
+                                                to={`/`}
+                                            >
+                                                Login or Sign Up to View Page
+                                            </Link>
+                                        </Button>
+                                    </Flex>
                                 </CardFooter>
-                                {/* </Stack> */}
                             </Card>
                         </div>
                     ))}
                 </>
-            ) :
-                null
+                </Flex>
+            ) : (
+            <p>No items found.</p>
+            )
             }
-            {/* </SimpleGrid>
-            </Flex> */}
-        </Container >
+    </>
     )
 }
 

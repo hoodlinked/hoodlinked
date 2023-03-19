@@ -23,19 +23,37 @@ export default function Home() {
   const { data } = useQuery(QUERY_USER);
   const isLargerThan768 = useBreakpointValue({ base: false, md: true });
   
-  const [showSignUpForm, setShowSignUpForm] = useState(false);
-  const [showLoginForm, setShowLoginForm] = useState(false);
+  const [displayedForm, setDisplayedForm] = useState(null);
+
+  // const [showSignUpForm, setShowSignUpForm] = useState(false);
+  // const [showLoginForm, setShowLoginForm] = useState(false);
+  
+  const toggleSignUpForm = () => {
+    if (displayedForm === 'signup') {
+      setDisplayedForm(null);
+    } else {
+      setDisplayedForm('signup');
+    }
+  };
+
+  const toggleLoginForm = () => {
+    if (displayedForm === 'login') {
+      setDisplayedForm(null);
+    } else {
+      setDisplayedForm('login');
+    }
+  };
+  
   const signUpRef = useRef();
 
   useEffect(() => {
-    if (showSignUpForm && signUpRef.current) {
+    if (displayedForm === 'signup' && signUpRef.current) {
       setTimeout(() => {
         signUpRef.current.scrollIntoView({ behavior: "smooth" });
       }, 10);
     }
-  }, [showSignUpForm, signUpRef]);
+  }, [displayedForm]);
 
-  
 
   let user;
 
@@ -72,17 +90,17 @@ export default function Home() {
           <Text fontSize="xl" mb="2rem" textAlign="center" px={[8, 16]}>
             Hoodlinked is a community-based sharing app that allows you to share and exchange items with people in your local area. Join a local group and start sharing today!
           </Text>
-          <Button onClick={() => setShowSignUpForm(!showSignUpForm)} variant="solid" colorScheme="orange" margin="1rem 0">
-            {showSignUpForm ? 'Hide form' : 'Sign up for free'}
+          <Button onClick={toggleSignUpForm} variant="solid" colorScheme="orange" margin="1rem 0">
+            {displayedForm === "signup" ? 'Hide form' : 'Sign up for free'}
           </Button>
-            {showSignUpForm && (
+            {displayedForm === "signup" && (
             <SignUp />
           )}
 
-          <Link onClick={() => setShowLoginForm(!showLoginForm)} fontSize="lg" color="gray.500" mb="2rem">
+          <Link onClick={toggleLoginForm} fontSize="lg" color="gray.500" mb="2rem">
             Already have an account? Log in
           </Link>
-          {showLoginForm && (
+            {displayedForm === "login" && (
             <LoginForm />
           )}
         </Flex>
@@ -98,17 +116,17 @@ export default function Home() {
         <Text fontSize="xl" mb="2rem" textAlign="center" px={[12, 20]}>
           Hoodlinked is a community-based sharing app that allows you to share and exchange items with people in your local area. Join a local group and start sharing today!
         </Text>
-        <Button onClick={() => setShowSignUpForm(!showSignUpForm)} variant="solid" colorScheme="orange" margin="1rem 0">
-          {showSignUpForm ? 'Hide form' : 'Sign up for free'}
+        <Button onClick={toggleSignUpForm} variant="solid" colorScheme="orange" margin="1rem 0">
+          {displayedForm === "signup" ? 'Hide form' : 'Sign up for free'}
         </Button>
-          {showSignUpForm && (
+          {displayedForm === "signup" && (
           <SignUp />
         )}
 
-        <Link onClick={() => setShowLoginForm(!showLoginForm)} fontSize="lg" color="gray.500" mb="2rem">
+        <Link onClick={toggleLoginForm} fontSize="lg" color="gray.500" mb="2rem">
           Already have an account? Log in
         </Link>
-        {showLoginForm && (
+        {displayedForm === "login" && (
           <LoginForm />
         )}
         </Flex>
