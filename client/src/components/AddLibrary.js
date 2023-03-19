@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
 import auth from '../utils/auth';
-import { CREATE_LIBRARY } from '../utils/mutations';
+import {
+    CREATE_LIBRARY,
+    REMOVE_LIBRARY_USER
+} from '../utils/mutations';
 import { QUERY_USER_LIBRARY } from '../utils/queries';
 import {
     Box,
@@ -53,6 +56,16 @@ function AddLibrary() {
         });
     }
 
+    const [removeLibraryUser] = useMutation(REMOVE_LIBRARY_USER);
+
+    const handleRemoveLibraryUser = async (_id) => {
+        const mutationResponse = await removeLibraryUser({
+            variables: { libraryId: _id }
+        });
+
+        document.location.reload();
+    }
+
     return (
         <>
 
@@ -62,16 +75,20 @@ function AddLibrary() {
                         {/* mapping all libraries logged in user has joined */}
                         {library.map(({ _id, name }, index) => (
                             <Box bg="white" margin="1rem 0" borderWidth="1px" borderColor="gray.200" borderRadius="lg" p="4" width={{ base: "100%", sm: "48%", md: "30%" }}>
+                                {/* linking every library to library page */}
                                 <Link
                                     to={`/library/${_id}`}
                                 >
-                                    <div key={index} className="my-2">
-                                        {/* linking every library to library page */}
-
+                                    <Heading as="h5" size="md" mb="2" key={index} className="my-2">
                                         <p>{name}</p>
-
-                                    </div>
+                                    </Heading>
                                 </Link>
+                                <Button
+                                    className="btn-block btn-danger"
+                                    onClick={() => handleRemoveLibraryUser(_id)}
+                                >
+                                    Remove Items from Group
+                                </Button>
                             </Box>
                         ))}
                     </>
