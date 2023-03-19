@@ -50,7 +50,7 @@ export default function Nav() {
     <>
         {!isLargerThan768 && (
             <Flex alignItems="center" bg='orange.500' w='100%' p={4} color='white'>
-                <Button as={HamburgerIcon} variant="unstyled" w={8} h={8} onClick={() => setIsDrawerOpen(true)} />
+                <Button as={HamburgerIcon} variant="unstyled" w={8} h={8} onClick={() => setIsDrawerOpen(true)} _hover={{ cursor: 'pointer' }}/>
             <Flex flexGrow={1} justifyContent="center">
                     <FontAwesomeIcon icon={faPeopleArrows} size="2x" style={{ marginRight: '1rem' }}/>
                     <Heading style={{ fontSize: '1.5rem' }} textTransform="uppercase" textAlign="center">Hoodlinked</Heading>
@@ -107,11 +107,10 @@ export default function Nav() {
                 {
                     user ? (
                         <>
-                        
                         <Breadcrumb spacing="8px" >
                         <Flex alignItems="center" >
-                        <FontAwesomeIcon icon={faPeopleArrows} size="2x" style={{ marginRight: '1rem' }}/>
-                            <BreadcrumbItem mar>
+                            <FontAwesomeIcon icon={faPeopleArrows} size="2x" style={{ marginRight: '1rem' }}/>
+                            <BreadcrumbItem>
                                 <BreadcrumbLink href='/dashboard' style={{ marginRight: '1rem' }}fontWeight='medium' textTransform="uppercase" _hover={{ color: 'gray.600' }}>Dashboard</BreadcrumbLink>
                             </BreadcrumbItem>
                             <BreadcrumbItem>
@@ -119,9 +118,14 @@ export default function Nav() {
                             </BreadcrumbItem>
                             </Flex>
                         </Breadcrumb>
-                            <Text>Welcome, {user.username}!</Text>
+
+                        <Flex alignItems="center" >
+                            <Text fontSize="md" style={{ marginRight: '.3rem' }} >Welcome,</Text>
+                            <Text fontWeight="bold" style={{ marginRight: '1rem' }}>{user.username}!</Text>
                             <Button bg="white" color="orange" onClick={handleLogout}>Logout</Button>
-                            
+                        </Flex>
+
+
                         </>
                     ) : (
                         <>
