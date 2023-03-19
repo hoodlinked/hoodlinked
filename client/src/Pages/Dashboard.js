@@ -8,6 +8,7 @@ import {
 import Item from '../components/Item';
 import React, { useState, useRef, useEffect } from "react";
 import AddLibrary from '../components/AddLibrary';
+import Home from '../Pages/Home'
 import LoginForm from '../components/LoginForm'
 import SignUp from '../components/SignUp'
 import { useQuery } from '@apollo/client';
@@ -63,29 +64,7 @@ export default function Dashboard() {
       ) : (
 
         <>
-          <Flex flexDirection="column" alignItems="center" my="4rem" p="3rem">
-            <Image src="hoodlinked-logo.png" alt="Hoodlinked Logo" width="200px" height="200px" mb="2rem" />
-            <Text fontSize="3xl" fontWeight="bold" mb="2rem" textAlign="center">
-              Welcome to Hoodlinked!
-            </Text>
-            <Text fontSize="xl" mb="2rem" textAlign="center">
-              Hoodlinked is a community-based sharing app that allows you to share and exchange items with people in your local area. Join a local group and start sharing today!
-            </Text>
-            <Button onClick={() => setShowSignUpForm(!showSignUpForm)} variant="solid" colorScheme="orange" margin="1rem 0">
-              {showSignUpForm ? 'Hide form' : 'Sign up for free'}
-            </Button>
-            {showSignUpForm && (
-              <SignUp />
-            )}
-
-            <Link onClick={() => setShowLoginForm(!showLoginForm)} fontSize="lg" color="gray.500" mb="2rem">
-              Already have an account? Log in
-            </Link>
-            {showLoginForm && (
-              <LoginForm />
-            )}
-          </Flex>
-
+        <Home />
         </>
       )}
 
