@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import auth from '../utils/auth';
-import { ADD_ITEM, REMOVE_ITEM } from '../utils/mutations';
+import { ADD_ITEM, REMOVE_ITEM, UPDATE_LIBRARY_ITEM } from '../utils/mutations';
 import { QUERY_USER } from '../utils/queries';
 import {
     Box,
@@ -44,6 +44,7 @@ function Item() {
     const [addItem] = useMutation(ADD_ITEM);
     const [showForm, setShowForm] = useState(false); // new state variable
     const [removeItem] = useMutation(REMOVE_ITEM);
+    const [updateLibraryItem] = useMutation(UPDATE_LIBRARY_ITEM);
     const [isAlertOpen, setIsAlertOpen] = useState(false);
     const [alertStates, setAlertStates] = useState(user.items.map(() => false));
 
@@ -73,6 +74,17 @@ function Item() {
         updatedAlertStates[index] = false;
         setAlertStates(updatedAlertStates);        
         document.location.reload();
+    }
+    const handleUpdateItem = async (itemId, content) => {
+        const obj = {
+            itemId, 
+            ...content
+        }
+        const mutationResponse = await updateLibraryItem({
+            variables: {obj }
+        });
+        
+       
     }
 
     const handleChange = (event) => {
@@ -122,6 +134,16 @@ function Item() {
                             onClick={() => handleAlertOpen(index)}
                         >
                             Remove
+                        </Button>
+                        <Button
+                            m={5}
+                            fontSize="md"
+                            p="20px"
+                            h="22px"
+                            colorScheme="orange"           
+                            // onClick={() => }
+                        >
+                            Edit
                         </Button>
 
                         <AlertDialog

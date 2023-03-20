@@ -83,3 +83,23 @@ mutation addLibraryItem($libraryId: ID!, $itemId: ID!) {
   }
 }
 `
+
+export const UPDATE_LIBRARY_ITEM = gql`
+mutation updateLibraryItem($itemId: ID!, $name: String, $description: String) {
+  updateLibraryItem(itemId: $itemId, name: $name, description: $description) {
+    _id
+    name
+    users {
+      _id
+      username
+      email
+      password
+      items {
+        _id
+        name
+        description
+      }
+    }
+  }
+}
+`
