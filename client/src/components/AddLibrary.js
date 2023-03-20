@@ -120,25 +120,25 @@ function AddLibrary() {
                                     <Heading as="h5" size="md" mb="2" key={index} className="my-2">
                                         <p>{name}</p>
                                     </Heading>
-                                    <Flex>
-                                        <Link
+                                    <Flex flexDirection="column" mt={8} alignItems="center">
+                                        <Link 
                                             to={`/library/${_id}`}
                                         >
                                             <Button
-                                                m={4}
-                                                fontSize="md"
+                                                m={1}
+                                                fontSize="sm"
                                                 p="20px"
-                                                h="22px"
-                                                colorScheme="orange"
+                                                h="20px"
+                                                bg="orange.200"
                                             >
                                                 View Group
                                             </Button>
                                         </Link>
                                         <Button
-                                            m={4}
-                                            fontSize="md"
+                                            m={1}
+                                            fontSize="sm"
                                             p="20px"
-                                            h="22px"
+                                            h="20px"
                                             colorScheme="orange"
                                             onClick={() => handleAlertOpen(index)}
                                         >
