@@ -50,14 +50,14 @@ export default function Nav() {
     return (
         <>
             {!isLargerThan768 && (
-                <Flex alignItems="center" bg='orange.500' w='100%' p={4} color='white'>
+                <Flex justifyConent="space-between" bg='orange.500' w='100%' p={4} color='white'>
                     <Button as={HamburgerIcon} variant="unstyled" w={8} h={8} onClick={() => setIsDrawerOpen(true)} _hover={{ cursor: 'pointer' }} />
-                    <Link href="/">
-                        <Flex flexGrow={1} justifyContent="center">
-                            <FontAwesomeIcon icon={faPeopleArrows} size="2x" style={{ marginRight: '1rem' }} />
-                            <Heading style={{ fontSize: '1.5rem' }} textTransform="uppercase" textAlign="center">Hoodlinked</Heading>
+                        <Flex alignItems="center" flexGrow={1} justifyContent="center">
+                            <Link href="/" display="flex" >
+                                <FontAwesomeIcon icon={faPeopleArrows} size="2x" style={{ marginRight: '1rem' }} />
+                                <Heading style={{ fontSize: '1.5rem' }} textTransform="uppercase" >Hoodlinked</Heading>
+                            </Link>
                         </Flex>
-                    </Link>
                 </Flex>
             )}
 

@@ -79,11 +79,16 @@ export default function Library() {
                                                                     Go to {user.username}'s page
                                                                 </Link>
                                                             </Button>
-                                                            <AddLibraryUser />
                                                         </Stack>
                                                     </Box>
                                                 ))}
                                             </Stack>
+                                        </CardBody>
+                                    </Card>
+
+                                    <Card  m={5}  shadow="0px">
+                                        <CardBody>
+                                        <AddLibraryUser />
                                         </CardBody>
                                     </Card>
                                 </>
@@ -93,9 +98,9 @@ export default function Library() {
 
                     {isLargerThan768 && (
                         <>
-                            <Flex flexWrap="wrap" justifyContent="center">
+                            <Flex flexWrap="wrap" justifyContent="center"flexDirection="column" alignItems="center">
                                 <>
-                                    <Card mt={10} bg="orange.100">
+                                    <Card  bg="orange.100" m={5}>
                                         <CardHeader>
                                             <Heading color="orange.500" textAlign="center">
                                                 {library.name}
@@ -118,21 +123,26 @@ export default function Library() {
                                                                 <Text>{description}</Text>
                                                             </Box>
                                                         ))}
-                                                        <Stack spacing={4} direction='row' align='center'>
-                                                            <Button variant="solid" colorScheme="orange" margin="1rem 0" _hover={{ color: "gray.600" }}>
+                                                        <Flex justifyContent="center">
+                                                            <Button variant="solid" colorScheme="orange" m={2} _hover={{ color: "gray.600" }}>
                                                                 <a target="_blank" href={`mailto:${user.email}`}>Email {user.username}</a>
                                                             </Button>
-                                                            <Button variant="solid" colorScheme="orange" margin="1rem 0" _hover={{ color: "gray.600" }}>
+                                                            <Button variant="solid" colorScheme="orange" m={2} _hover={{ color: "gray.600" }}>
                                                                 <Link to={`/user/${user._id}`} _hover={{ color: "gray.600" }}>
                                                                     Go to {user.username}'s page
                                                                 </Link>
                                                             </Button>
-                                                            <AddLibraryUser />
-                                                        </Stack>
+                                                        </Flex>
                                                     </Box>
                                                 ))}
 
                                             </Stack>
+                                        </CardBody>
+                                    </Card>
+
+                                    <Card mb={5} shadow="0px">
+                                        <CardBody>
+                                            <AddLibraryUser />
                                         </CardBody>
                                     </Card>
                                 </>
