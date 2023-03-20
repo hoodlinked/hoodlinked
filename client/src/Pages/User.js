@@ -57,7 +57,7 @@ export default function User() {
                                         </Heading>
                                         <Text>{description}</Text>
                                         <Button variant="solid" colorScheme="orange" margin="1rem 0">
-                                            <a target="_blank" href={`mailto:${email}?&subject=Is%20Your%20${name}%20available?&body=Hi%20${username},%20I%20am%20interested%20in%20borrowing%20your%20${name}%20let%20me%20know%20if%20it%20is%20available!`}>Email {username} about borrowing {name}</a>
+                                            <a target="_blank" href={`mailto:${email}?&subject=Is%20Your%20${name}%20available?&body=Hi%20${username},%20I%20am%20interested%20in%20borrowing%20your%20${name}%20let%20me%20know%20if%20it%20is%20available!`}>Email about this item</a>
                                         </Button>
                                     </Box>
                                 ))}

@@ -39,10 +39,10 @@ function CardsContext({ searchQuery}) {
                     {filteredLibrary.map((library, index) => (                                  <div key={index}>
                                     <Card
                                       borderWidth="1px"
-                                      minW="md"
-                                      maxW="md"
-                                      minH="lg"
-                                      maxH="lg"
+                                    //   minW="md"
+                                    //   maxW="md"
+                                    //   minH="lg"
+                                    //   maxH="lg"
                                       borderColor="gray.200"
                                       bg="orange.100"
                                       borderRadius="lg"
@@ -87,7 +87,7 @@ function CardsContext({ searchQuery}) {
                                                     <Link
                                                         to={`/library/${library._id}`}
                                                     >
-                                                        Go to {library.name}'s Page
+                                                        Group Page
                                                     </Link>
                                                 </Button>
                                                 </Flex>

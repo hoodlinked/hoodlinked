@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
 import auth from '../utils/auth';
+import SearchLibraryUser from './SearchLibraryUser';
+import SearchLibraryName from './SearchLibraryName';
+
 import {
     CREATE_LIBRARY,
     REMOVE_LIBRARY_USER
@@ -18,6 +21,7 @@ import {
     VStack,
     Flex,
     Stack,
+    Divider,
 } from '@chakra-ui/react'
 
 import {
@@ -45,6 +49,8 @@ function AddLibrary() {
     const [formState, setFormState] = useState({ name: '' })
     const [createLibrary] = useMutation(CREATE_LIBRARY);
     const [showForm, setShowForm] = useState(false); // new state variable
+    const [showUserSearch, setShowUserSearch] = useState(false);//state varibale for user search
+    const [showGroupSearch, setShowGroupSearch] = useState(false);//state varibale for group name search
     const [removeLibraryUser] = useMutation(REMOVE_LIBRARY_USER);
     const [isAlertOpen, setIsAlertOpen] = useState(false);
     const [alertStates, setAlertStates] = useState(library.map(() => false));
@@ -121,7 +127,7 @@ function AddLibrary() {
                                         <p>{name}</p>
                                     </Heading>
                                     <Flex flexDirection="column" mt={8} alignItems="center">
-                                        <Link 
+                                        <Link
                                             to={`/library/${_id}`}
                                         >
                                             <Button
@@ -184,7 +190,7 @@ function AddLibrary() {
 
             {/* New button to toggle the form */}
             <Button onClick={() => setShowForm(!showForm)} variant="solid" colorScheme="orange" margin="1rem 0">
-                {showForm ? 'Hide form' : 'New Library +'}
+                {showForm ? 'Hide form' : 'New Group +'}
             </Button>
 
             {/* Show the form only if showForm is true */}
@@ -192,7 +198,7 @@ function AddLibrary() {
                 <Box borderWidth="1px" borderColor="gray.200" bg='orange.100' borderRadius="lg" p="4">
                     <VStack align="stretch">
                         <Heading as="h5" size="md" mb="2">
-                            Create a new group for people in your community to join
+                            Create a new group for people in your community to join. Groups allow users to post all their items.
                         </Heading>
                         <form onSubmit={handleFormSubmit}>
                             <FormControl isRequired>
@@ -217,6 +223,32 @@ function AddLibrary() {
                         </form>
                     </VStack>
                 </Box>)}
+                <Divider margin="1rem 0" />
+            <Heading>
+                Search for Groups to Join
+            </Heading>
+            <Divider margin="1rem 0" />
+            <Box>
+                <Heading size="md">
+                    Want to join a group with a user?
+                </Heading>
+                <Button onClick={() => setShowUserSearch(!showUserSearch)} variant="solid" colorScheme="orange" margin="1rem 0">
+                    {showUserSearch ? 'Hide User Search' : 'Search Groups by User'}
+                </Button>
+                {showUserSearch && (
+                    <SearchLibraryUser />
+                )}
+
+                <Heading size="md">
+                    Know the name of the group you want to join?
+                </Heading>
+                <Button onClick={() => setShowGroupSearch(!showGroupSearch)} variant="solid" colorScheme="orange" margin="1rem 0">
+                    {showGroupSearch ? 'Hide Name Search' : 'Search Groups by Name'}
+                </Button>
+                {showGroupSearch && (
+                    <SearchLibraryName />
+                )}
+            </Box>
         </>
     )
 }
