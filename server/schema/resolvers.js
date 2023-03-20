@@ -190,6 +190,29 @@ const resolvers = {
 
             throw new AuthenticationError('Not logged in')
         },
+        updateLibraryItem: async (parent, args, context) => {
+            if (context.user) {
+                const item = await Item.findByIdAndUpdate(args.itemId, args, {
+                    new: true,
+                    runValidators: true,
+                });
+
+                // const library = await Library.findByIdAndUpdate(
+                //     libraryId, 
+                //     {
+                //         $addToSet: { items: item._id }
+                //     }, 
+                //     {
+                //         new: true,
+                //         runValidators: true,
+                //     }
+                // ).populate('items');
+
+                return item
+            }
+
+            throw new AuthenticationError('Not logged in')
+        },
     }
 };
 

@@ -53,7 +53,8 @@ const typeDefs = gql`
         ): Library
         removeItem(itemId: ID!): User
         removeLibraryUser(libraryId: ID!): Library
-        addLibraryItem(libraryId: ID!, itemId: ID!): Library      
+        addLibraryItem(libraryId: ID!, itemId: ID!): Library    
+        updateLibraryItem( itemId: ID!,name: String, description: String): Library      
     }
 `;
 
