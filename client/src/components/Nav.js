@@ -112,7 +112,7 @@ export default function Nav() {
                         user ? (
                             <>
                                 <Breadcrumb spacing="8px" >
-                                    <Flex alignItems="center" >
+                                    <Flex justifyContent="center" alignItems="center" >
                                         <Link href="/">
                                             <FontAwesomeIcon icon={faPeopleArrows} size="2x" style={{ marginRight: '1rem' }} />
                                         </Link>
@@ -135,10 +135,10 @@ export default function Nav() {
                             </>
                         ) : (
                             <>
-                                <Flex alignItems="center" justifyContent="center">
-                                    <Link href="/">
+                                <Flex>
+                                    <Link href="/" display="flex">
                                         <FontAwesomeIcon icon={faPeopleArrows} size="2x" style={{ marginRight: '1rem' }} />
-                                        <Text color="white" fontSize="xl" fontWeight="bold">HOODLINKED</Text>
+                                        <Text color="white" fontSize="xl" fontWeight="bold" textTransform="uppercase">Hoodlinked</Text>
                                     </Link>
                                 </Flex>
                                 <Button bg="white" color="orange" onClick={handleLogin}>Login or Sign Up</Button>
