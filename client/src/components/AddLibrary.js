@@ -17,6 +17,7 @@ import {
     Input,
     VStack,
     Flex,
+    Stack,
 } from '@chakra-ui/react'
 
 import {
@@ -26,7 +27,7 @@ import {
     AlertDialogHeader,
     AlertDialogContent,
     AlertDialogOverlay,
-  } from '@chakra-ui/react'
+} from '@chakra-ui/react'
 
 function AddLibrary() {
 
@@ -72,7 +73,7 @@ function AddLibrary() {
 
         const updatedAlertStates = [...alertStates];
         updatedAlertStates[index] = false;
-        setAlertStates(updatedAlertStates);        
+        setAlertStates(updatedAlertStates);
         document.location.reload();
     }
 
@@ -88,7 +89,7 @@ function AddLibrary() {
     const handleDelete = async (_id, index) => {
         await handleRemoveLibraryUser(_id, index);
         onClose();
-      };      
+    };
 
 
     const cancelRef = React.useRef();
@@ -104,7 +105,7 @@ function AddLibrary() {
         updatedAlertStates[index] = false;
         setAlertStates(updatedAlertStates);
     };
-   
+
 
     return (
         <>
@@ -113,60 +114,66 @@ function AddLibrary() {
                     <>
                         {/* mapping all libraries logged in user has joined */}
                         {library.map(({ _id, name }, index) => (
-                            <Box bg="white" margin="1rem 0" borderWidth="1px" borderColor="gray.200" borderRadius="lg" p="4" width={{ base: "100%", sm: "48%", md: "30%" }}>
+                            <Box bg="white" margin="1rem 0" borderWidth="1px" borderColor="gray.200" borderRadius="lg" p="3" width={{ base: "100%", sm: "48%", md: "30%" }}>
                                 {/* linking every library to library page */}
                                 <Flex flexDirection="column" alignItems="center">
-                                <Link
-                                    to={`/library/${_id}`}
-                                >
                                     <Heading as="h5" size="md" mb="2" key={index} className="my-2">
                                         <p>{name}</p>
                                     </Heading>
-                                </Link>
-                                <Button
-                                    m={5}
-                                    fontSize="sm"
-                                    p="10px"
-                                    h="22px"
-                                    colorScheme="orange"
-                                    onClick={() => handleAlertOpen(index)}
-                                >
-                                    Delete Group
-                                </Button>
-
-                                <AlertDialog
-                                    isOpen={alertStates[index]}
-                                    // leastDestructiveRef={cancelRef}
-                                    onClose={() => handleAlertClose(index)}
-                        >
-                                    <AlertDialogOverlay>
-                                    <AlertDialogContent>
-                                        <AlertDialogHeader fontSize='lg' fontWeight='bold'>
-                                        Delete Item
-                                        </AlertDialogHeader>
-
-                                        <AlertDialogBody>
-                                        Are you sure you want to delete this item? This action cannot be undone.
-                                        </AlertDialogBody>
-
-                                        <AlertDialogFooter>
-                                        <Button ref={cancelRef} onClick={() => { handleAlertClose(index); onClose(); }}>
-                                            Cancel
+                                    <Flex>
+                                        <Link
+                                            to={`/library/${_id}`}
+                                        >
+                                            <Button
+                                                m={4}
+                                                fontSize="md"
+                                                p="20px"
+                                                h="22px"
+                                                colorScheme="orange"
+                                            >
+                                                View Group
+                                            </Button>
+                                        </Link>
+                                        <Button
+                                            m={4}
+                                            fontSize="md"
+                                            p="20px"
+                                            h="22px"
+                                            colorScheme="orange"
+                                            onClick={() => handleAlertOpen(index)}
+                                        >
+                                            Leave Group
                                         </Button>
-                                        <Button colorScheme='red' onClick={() => handleDelete(_id)} ml={3}>
-                                            Delete
-                                        </Button>
-                                        </AlertDialogFooter>
-                                    </AlertDialogContent>
-                                    </AlertDialogOverlay>
-                                </AlertDialog>
+                                    </Flex>
 
+                                    <AlertDialog
+                                        isOpen={alertStates[index]}
+                                        // leastDestructiveRef={cancelRef}
+                                        onClose={() => handleAlertClose(index)}
+                                    >
+                                        <AlertDialogOverlay>
+                                            <AlertDialogContent>
+                                                <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                                                    Leave Group
+                                                </AlertDialogHeader>
 
+                                                <AlertDialogBody>
+                                                    Are you sure you want to leave this group?
+                                                </AlertDialogBody>
 
-
+                                                <AlertDialogFooter>
+                                                    <Button ref={cancelRef} onClick={() => { handleAlertClose(index); onClose(); }}>
+                                                        Cancel
+                                                    </Button>
+                                                    <Button colorScheme='red' onClick={() => handleDelete(_id)} ml={3}>
+                                                        Leave
+                                                    </Button>
+                                                </AlertDialogFooter>
+                                            </AlertDialogContent>
+                                        </AlertDialogOverlay>
+                                    </AlertDialog>
                                 </Flex>
                             </Box>
-                            
                         ))}
                     </>
                 ) :

@@ -52,22 +52,33 @@ export default function Dashboard() {
             <>
               <Box w="100%" bg="white" p="4">
                 <Heading mb="4">My Items</Heading>
+                <Text fontSize="lg">List the items you want to share.</Text>
                 <Item />
                 <Divider margin="3rem 0" />
                 <Heading mb="4">My Groups</Heading>
+                <Text fontSize="lg">Find and edit the groups you share with.</Text>
                 <AddLibrary />
               </Box>
-            </>    
+            </>
           )}
 
           {isLargerThan768 && (
             <>
-              <Box w="25%" bg="orange.100" minW="fit-content">
+              <Box w="25%" bg="orange.100">
                 <Box p="4">
                   <Avatar size="lg" src={user.avatarUrl} />
                   <Heading size="md" mt="4" mb="2">Hello,</Heading>
                   <Heading>{user.username}!</Heading>
                   <Text fontSize="md">{user.email}</Text>
+                  <Divider margin="1rem 0" />
+                  <Heading size="md">
+                    This is your Dashboard.
+                  </Heading>
+                  <Divider />
+                  <Box >
+                    <Text fontSize="lg">List the items you want to share.</Text>
+                    <Text fontSize="lg">Find and edit the groups you share with.</Text>
+                  </Box>
                 </Box>
               </Box>
               <Box w="75%" bg="white" p="4">

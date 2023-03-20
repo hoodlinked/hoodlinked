@@ -115,8 +115,8 @@ function Item() {
                     <Stack spacing={4} direction='row' align='center'>
                         <Button
                             m={5}
-                            fontSize="sm"
-                            p="10px"
+                            fontSize="md"
+                            p="20px"
                             h="22px"
                             colorScheme="orange"           
                             onClick={() => handleAlertOpen(index)}
@@ -132,11 +132,11 @@ function Item() {
                             <AlertDialogOverlay>
                             <AlertDialogContent>
                                 <AlertDialogHeader fontSize='lg' fontWeight='bold'>
-                                Delete Item
+                                Remove Item
                                 </AlertDialogHeader>
 
                                 <AlertDialogBody>
-                                Are you sure you want to delete this item? This action cannot be undone.
+                                Are you sure you want to remove this item? This action cannot be undone.
                                 </AlertDialogBody>
 
                                 <AlertDialogFooter>

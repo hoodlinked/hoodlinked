@@ -39,7 +39,9 @@ export default function AddLibraryUser() {
                     type="submit"
                     variant="solid"
                     colorScheme="orange"
+                    margin="1rem 0"
                     _hover={{ color: "gray.600" }}
+                    w="100%"
                 >
                     Share your Items with this group
                 </Button>
