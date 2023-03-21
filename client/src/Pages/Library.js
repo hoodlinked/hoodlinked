@@ -69,7 +69,7 @@ export default function Library() {
                                                         ))}
                                                         <Stack spacing={4} align='left'>
                                                             <Button variant="solid" colorScheme="orange" margin="1rem 0" _hover={{ color: "gray.600" }}>
-                                                                <a target="_blank" href={`mailto:${user.email}`}>Email {user.username}</a>
+                                                                <a target="_blank" href={`mailto:${user.email}?&subject=Let's%20Connect!&body=Hi%20${user.username},%20Let's%20connect%20on%20Hoodlinked!`}>Email {user.username}</a>
                                                             </Button>
                                                             <Button variant="solid" colorScheme="orange" margin="1rem 0" _hover={{ color: "gray.600" }}>
                                                                 <Link to={`/user/${user._id}`} _hover={{ color: "gray.600" }}>
@@ -83,9 +83,9 @@ export default function Library() {
                                         </CardBody>
                                     </Card>
 
-                                    <Card  m={5}  shadow="0px">
+                                    <Card m={5} shadow="0px">
                                         <CardBody>
-                                        <AddLibraryUser />
+                                            <AddLibraryUser />
                                         </CardBody>
                                     </Card>
                                 </>
@@ -95,9 +95,9 @@ export default function Library() {
 
                     {isLargerThan768 && (
                         <>
-                            <Flex flexWrap="wrap" justifyContent="center"flexDirection="column" alignItems="center">
+                            <Flex flexWrap="wrap" justifyContent="center" flexDirection="column" alignItems="center">
                                 <>
-                                    <Card  bg="orange.100" m={5}>
+                                    <Card bg="orange.100" m={5}>
                                         <CardHeader>
                                             <Heading color="orange.500" textAlign="center">
                                                 {library.name}
@@ -122,7 +122,7 @@ export default function Library() {
                                                         ))}
                                                         <Flex justifyContent="center">
                                                             <Button variant="solid" colorScheme="orange" m={2} _hover={{ color: "gray.600" }}>
-                                                                <a target="_blank" href={`mailto:${user.email}`}>Email {user.username}</a>
+                                                                <a target="_blank" href={`mailto:${user.email}?&subject=Let's%20Connect!&body=Hi%20${user.username},%20Let's%20connect%20on%20Hoodlinked!`}>Email {user.username}</a>
                                                             </Button>
                                                             <Button variant="solid" colorScheme="orange" m={2} _hover={{ color: "gray.600" }}>
                                                                 <Link to={`/user/${user._id}`} _hover={{ color: "gray.600" }}>
