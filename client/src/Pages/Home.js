@@ -1,34 +1,26 @@
 import {
-  Heading,
   Box,
   Text,
   Flex,
   Link,
   Image,
   Button,
-  Divider,
 
 } from '@chakra-ui/react'
 import { useBreakpointValue } from '@chakra-ui/react'
 import { Highlight } from '@chakra-ui/react';
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import LoginForm from '../components/LoginForm'
 import SignUp from '../components/SignUp'
-import Dashboard from './Dashboard';
 import { useQuery } from '@apollo/client';
 
 import { QUERY_USER } from "../utils/queries";
 
 export default function Home() {
-  // const navigate = useNavigate();
   const { data } = useQuery(QUERY_USER);
   const isLargerThan768 = useBreakpointValue({ base: false, md: true });
 
   const [displayedForm, setDisplayedForm] = useState(null);
-
-  // const [showSignUpForm, setShowSignUpForm] = useState(false);
-  // const [showLoginForm, setShowLoginForm] = useState(false);
 
   const toggleSignUpForm = () => {
     if (displayedForm === 'signup') {

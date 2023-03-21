@@ -1,12 +1,10 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { useMutation, useQuer, useQuery } from '@apollo/client';
-import auth from '../utils/auth';
+import { useParams } from 'react-router-dom';
+import { useMutation, useQuery } from '@apollo/client';
 import { QUERY_USER } from '../utils/queries';
 import { ADD_LIBRARY_USER } from '../utils/mutations';
 
 import {
-    Box,
     Button,
 } from '@chakra-ui/react'
 

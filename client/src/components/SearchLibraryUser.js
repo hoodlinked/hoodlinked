@@ -26,7 +26,6 @@ function SearchLibraryUser() {
 
     if (data) {
         library = data.libraries;
-        console.log(library)
     }
 
     const filteredLibrary = library

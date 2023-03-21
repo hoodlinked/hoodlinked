@@ -30,9 +30,6 @@ export default function User() {
         user = data.userItems
         email = user.email
         username = user.username
-        console.log(data);
-        console.log(username)
-
     }
 
     return (

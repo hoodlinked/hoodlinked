@@ -67,6 +67,7 @@ query FindUserLibraries {
   findUserLibraries {
     name
     _id
+    description
   }
 }
 `

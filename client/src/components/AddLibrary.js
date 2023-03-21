@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
-import auth from '../utils/auth';
 import SearchLibraryUser from './SearchLibraryUser';
 import SearchLibraryName from './SearchLibraryName';
 
@@ -20,8 +19,8 @@ import {
     Input,
     VStack,
     Flex,
-    Stack,
     Divider,
+    Textarea,
 } from '@chakra-ui/react'
 
 import {
@@ -41,12 +40,12 @@ function AddLibrary() {
 
     if (data) {
         library = data.findUserLibraries;
-        console.log(library)
     }
 
     const libraryName = document.getElementById('libraryName')
+    const libraryDescription = document.getElementById('libraryDescription')
 
-    const [formState, setFormState] = useState({ name: '' })
+    const [formState, setFormState] = useState({ name: '', description: '' })
     const [createLibrary] = useMutation(CREATE_LIBRARY);
     const [showForm, setShowForm] = useState(false); // new state variable
     const [showUserSearch, setShowUserSearch] = useState(false);//state varibale for user search
@@ -62,11 +61,13 @@ function AddLibrary() {
         event.preventDefault();
         const mutationResponse = await createLibrary({
             variables: {
-                name: formState.name
+                name: formState.name,
+                description: formState.description
             },
         });
         // clearing form fields and reloading page for rendering
         libraryName.value = "";
+        libraryDescription.value = "";
         document.location.reload();
 
     };
@@ -119,13 +120,16 @@ function AddLibrary() {
                 {library ? (
                     <>
                         {/* mapping all libraries logged in user has joined */}
-                        {library.map(({ _id, name }, index) => (
+                        {library.map(({ _id, name, description }, index) => (
                             <Box bg="white" margin="1rem 0" borderWidth="1px" borderColor="gray.200" borderRadius="lg" p="3" width={{ base: "100%", sm: "48%", md: "30%" }}>
                                 {/* linking every library to library page */}
                                 <Flex flexDirection="column" alignItems="center">
                                     <Heading as="h5" size="md" mb="2" key={index} className="my-2">
                                         <p>{name}</p>
                                     </Heading>
+                                    <Text>
+                                        {description}
+                                    </Text>
                                     <Flex flexDirection="column" mt={8} alignItems="center">
                                         <Link
                                             to={`/library/${_id}`}
@@ -211,6 +215,21 @@ function AddLibrary() {
                                     type="text"
                                     id="libraryName"
                                     bg="white"
+                                    value={formState.name}
+                                    onChange={handleChange}
+                                />
+                            </FormControl>
+                            <FormControl isRequired>
+                                <FormLabel htmlFor="name">
+                                    Group Description:
+                                </FormLabel>
+                                <Textarea
+                                    placeholder="What's your group all about? Who's in it?"
+                                    name="description"
+                                    type="Textarea"
+                                    id="libraryDescription"
+                                    bg="white"
+                                    value={formState.description}
                                     onChange={handleChange}
                                 />
                             </FormControl>

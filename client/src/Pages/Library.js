@@ -34,9 +34,6 @@ export default function Library() {
 
     if (data) {
         library = data.library
-        console.log(data);
-        console.log(library)
-
     }
 
     return (

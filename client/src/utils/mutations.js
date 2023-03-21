@@ -35,12 +35,13 @@ mutation AddItem($name: String!, $description: String!) {
 `
 
 export const CREATE_LIBRARY = gql`
-  mutation CreateLibrary( $name: String!) {
-    createLibrary(name: $name) {
-      name
-    }
-  }  
-  `
+mutation CreateLibrary($name: String!, $description: String!) {
+  createLibrary(name: $name, description: $description) {
+    name
+    description
+  }
+}  
+`
 
 export const ADD_LIBRARY_USER = gql`
   mutation AddLibraryUser($libraryId: ID!) {
