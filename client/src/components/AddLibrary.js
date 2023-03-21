@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
 import SearchLibraryUser from './SearchLibraryUser';
 import SearchLibraryName from './SearchLibraryName';
+import SearchLibraryUserEmail from './SearchLibraryUserEmail'
 
 import {
     CREATE_LIBRARY,
@@ -21,6 +22,7 @@ import {
     Flex,
     Divider,
     Textarea,
+    Stack,
 } from '@chakra-ui/react'
 
 import {
@@ -50,6 +52,7 @@ function AddLibrary() {
     const [showForm, setShowForm] = useState(false); // new state variable
     const [showUserSearch, setShowUserSearch] = useState(false);//state varibale for user search
     const [showGroupSearch, setShowGroupSearch] = useState(false);//state varibale for group name search
+    const [showUserEmailSearch, setShowUserEmailSearch] = useState(false);//stat variable for user email search
     const [removeLibraryUser] = useMutation(REMOVE_LIBRARY_USER);
     const [isAlertOpen, setIsAlertOpen] = useState(false);
     const [alertStates, setAlertStates] = useState(library.map(() => false));
@@ -242,7 +245,7 @@ function AddLibrary() {
                         </form>
                     </VStack>
                 </Box>)}
-                <Divider margin="1rem 0" />
+            <Divider margin="1rem 0" />
             <Heading>
                 Search for Groups to Join
             </Heading>
@@ -251,22 +254,34 @@ function AddLibrary() {
                 <Heading size="md">
                     Want to join a group with a user?
                 </Heading>
-                <Button onClick={() => setShowUserSearch(!showUserSearch)} variant="solid" colorScheme="orange" margin="1rem 0">
-                    {showUserSearch ? 'Hide User Search' : 'Search Groups by User'}
-                </Button>
-                {showUserSearch && (
-                    <SearchLibraryUser />
-                )}
+                {/* <Stack> */}
+                    <Button onClick={() => setShowUserSearch(!showUserSearch)} variant="solid" colorScheme="orange" margin="1rem 0">
+                        {showUserSearch ? 'Hide User Search' : 'Search Groups by User'}
+                    </Button>
+                    {showUserSearch && (
+                        <SearchLibraryUser />
+                    )}
+                    <Divider/>
+                    <Button onClick={() => setShowUserEmailSearch(!showUserEmailSearch)} variant="solid" colorScheme="orange" margin="1rem 0">
+                        {showUserEmailSearch ? 'Hide Email Search' : 'Search Groups by User Email'}
+                    </Button>
+                    {showUserEmailSearch && (
+                        <SearchLibraryUserEmail />
+                    )}
+                {/* </Stack> */}
+                <Divider margin="1rem" />
 
                 <Heading size="md">
                     Know the name of the group you want to join?
                 </Heading>
-                <Button onClick={() => setShowGroupSearch(!showGroupSearch)} variant="solid" colorScheme="orange" margin="1rem 0">
-                    {showGroupSearch ? 'Hide Name Search' : 'Search Groups by Name'}
-                </Button>
-                {showGroupSearch && (
-                    <SearchLibraryName />
-                )}
+                {/* <Stack> */}
+                    <Button onClick={() => setShowGroupSearch(!showGroupSearch)} variant="solid" colorScheme="orange" margin="1rem 0">
+                        {showGroupSearch ? 'Hide Name Search' : 'Search Groups by Name'}
+                    </Button>
+                    {showGroupSearch && (
+                        <SearchLibraryName />
+                    )}
+                {/* </Stack> */}
             </Box>
         </>
     )

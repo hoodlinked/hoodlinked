@@ -20,8 +20,10 @@ query Libraries {
   libraries {
     _id
     name
+    description
     users {
       username
+      email
       items {
         name
       }

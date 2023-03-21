@@ -73,7 +73,7 @@ function SearchLibraryName() {
                                     .toLowerCase()
                                     .includes(searchQuery.toLocaleLowerCase())
                             )
-                            .map(({ name, _id }, index) => (
+                            .map(({ name, _id, description }, index) => (
                                 <Card
                                     borderWidth="1px"
                                     // minW="md"
@@ -90,20 +90,11 @@ function SearchLibraryName() {
                                     <Heading textAlign="center">
                                         {name}
                                     </Heading>
-                                    {/* <CardBody >
-                                        {library.users
-                                            .filter((user) =>
-                                                user.username
-                                                    .toLowerCase()
-                                                    .includes(searchQuery.toLowerCase())
-                                            )
-                                            .map(({ username }, index) => (
-                                                <Heading
-                                                    as='h6' size='sm' key={index}>
-                                                    {username}
-                                                </Heading>
-                                            ))}
-                                    </CardBody> */}
+                                    <CardBody >
+                                        <Text>
+                                            {description}
+                                        </Text>
+                                    </CardBody>
                                     <CardFooter>
                                         <Flex justifyContent="center" alignItems="center" width="100%">
                                             <Button variant='solid' colorScheme='orange'>
