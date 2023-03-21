@@ -6,6 +6,7 @@ const typeDefs = gql`
         name: String 
         users: [User]
         items: [Item]
+        description: String!
     }
 
     type Item {
@@ -47,14 +48,14 @@ const typeDefs = gql`
         addUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!):Auth
         addItem(name: String!, description: String! ): Item
-        createLibrary(name: String!): Library
+        createLibrary(name: String!, description: String!): Library
         addLibraryUser(
             libraryId: ID!
         ): Library
         removeItem(itemId: ID!): User
         removeLibraryUser(libraryId: ID!): Library
         addLibraryItem(libraryId: ID!, itemId: ID!): Library    
-        updateLibraryItem( itemId: ID!,name: String, description: String): Library      
+        updateLibraryItem( itemId: ID!, name: String, description: String): Library      
     }
 `;
 

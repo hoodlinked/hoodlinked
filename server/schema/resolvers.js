@@ -98,10 +98,9 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
 
         },
-        createLibrary: async (parent, { name }, context) => {
-            console.log(context);
+        createLibrary: async (parent, { name, description }, context) => {
             if (context.user) {
-                const library = await Library.create({ name });
+                const library = await Library.create({ name, description });
 
                 const user = await User.findById(context.user._id)
 
@@ -115,7 +114,6 @@ const resolvers = {
             }
         },
         addLibraryUser: async (parent, { libraryId }, context) => {
-            console.log(context);
             if (context.user) {
                 const user = await User.findById(context.user._id)
 

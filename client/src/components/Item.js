@@ -135,7 +135,7 @@ function Item() {
                         >
                             Remove
                         </Button>
-                        <Button
+                        {/* <Button
                             m={5}
                             fontSize="md"
                             p="20px"
@@ -144,7 +144,7 @@ function Item() {
                             // onClick={() => }
                         >
                             Edit
-                        </Button>
+                        </Button> */}
 
                         <AlertDialog
                             isOpen={alertStates[index]}
