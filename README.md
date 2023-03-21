@@ -1,11 +1,9 @@
-# hoodlinked
+# Hoodlinked
 
-## Description
-  Hoodlinked is a community-based sharing app. Users post the items they want to share and join groups to post their items to share with members of their communities. 
+  ## Description
+  Hoodlinked is a community-based sharing app. Upload the items you want to share and join groups to list your items with members of your community!
 
   ## Table of Contents
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installing)
   * [Usage](#usage)
   * [License](#license)
   * [Questions](#questions)
@@ -13,43 +11,51 @@
   ## Getting Started
 
   Access the deployed app here: 
-  [Text Editor Slay](https://text-editor-slay.herokuapp.com/)
+  [Hoodlinked](https://hoodlinked.herokuapp.com/)
 
   ## Usage
-  Users can create accounts to upload items. They can create groups to post their items to and offer their items to other members of their communities. 
 
   ### App Functionality
 
-  When using the app for the first time, users can sign up with a username, password, and email. 
+  Upon visiting the website for the first time, the user is presented with the homepage, which includes the option to log in, sign up, and a brief overview of Hoodlinked. If a user has previously created an account, they may sign in. Otherwise, a new account can be made using the forms.
 
-  ![Start-up](assets/1.png)
+  ![Welcome](client/public/assets/Welcome.png)
 
-  When a user clicks on the homepage option, they are taken to the homepage and presented with any exisiting blog posts that include the post title and the date created. If they click another navation link (Login or Dashboard), they are prompted to either sign up or sign in.
+  ![Login](/client/public/assets/LogIn.jpg)
 
-  ![Start-up](assets/2.png)
+  ![Sign-up](/client/public/assets/SignUp.jpg)
 
-  If a user has previously created an account, they may sign in. Otherwise, a new account can be made using the forms.
+  Creating an account/signing in will redirect the user to their dashboard where a user can see their Groups and Items.
 
-  ![Start-up](assets/3.png)
+  ![Sign-up](/client/public/assets/Dashboard-Items.jpg)
 
-  Creating an account/signing in will redirect the user to their dashboard. On their Dasshboard, Here they have the option of creating  a new blog post.
+  ![Sign-up](/client/public/assets/Dashboard-Groups.jpg)
 
-  The user will also now see the option to Logout.
+  A user may also visit the Groups page to view all current groups and browse them.
 
-  ![Start-up](assets/4.png)
+  ![Sign-up](/client/public/assets/Groups.jpg)
 
-  The user will also see a list of previously posted blog posts. They are able to click into them to view or delete them if they wish to.
+  A user can create new Groups and Items.
 
-  ![Start-up](assets/5.png)
-
-  When a user clicks on an existing blog post, they are presented with the post title, contents, post creator’s username, and date created for that post and have the option to leave a comment.
-
-  ![Start-up](assets/6.png)
-
+  ![Sign-up](/client/public/assets/Add%20Group.jpg)
+  ![Sign-up](/client/public/assets/Add%20Item.jpg)
+  
+  Or they can search through already existing.
+  
+  ![Sign-up](/client/public/assets/Dashboard-Search%20Groups%20Name.jpg)
+  ![Sign-up](/client/public/assets/Dashboard-Search%20Groups%20User.jpg)
+  ![Sign-up](/client/public/assets/Dashboard-Search%20Groups.jpg)
 
 
   ## License
-  N/A
+  MIT
 
-  ## Questions
-  For inquiries, please email me at arboleda.jen@gmail.com or visit my [GitHub](https://github.com/internetjen)
+  ## Credits
+
+  Genevieve Mladenka: [GitHub](https://github.com/genmla)
+
+  Nara Kim: [GitHub](https://github.com/mintedd)
+
+  Jaya Singh: [GitHub](https://github.com/jaya4ever)
+
+  Jennifer Arboleda: [GitHub](https://github.com/internetjen)
